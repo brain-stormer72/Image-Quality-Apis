@@ -1073,3 +1073,36 @@ ValueError: too many values to unpack (expected 2)
 2025-09-22 16:59:24 - __main__ - INFO - analyze_comprehensive_quality_optimized:463 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg: 1 issues detected
 2025-09-22 16:59:24 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Time: 40.535s
 2025-09-22 16:59:24 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 40.540s
+2025-09-22 18:51:24 - main - INFO - lifespan:72 - Starting Image Quality Check API...
+2025-09-22 18:51:28 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 18:51:28 - main - INFO - lifespan:98 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 18:51:28 - main - INFO - lifespan:111 - ImageQualityDetector initialized successfully
+2025-09-22 18:51:28 - main - INFO - lifespan:115 - BlurTypeClassifier initialized successfully
+2025-09-22 18:52:26 - main - INFO - lifespan:72 - Starting Image Quality Check API...
+2025-09-22 18:52:30 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 18:52:30 - main - INFO - lifespan:98 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 18:52:30 - main - INFO - lifespan:111 - ImageQualityDetector initialized successfully
+2025-09-22 18:52:30 - main - INFO - lifespan:115 - BlurTypeClassifier initialized successfully
+2025-09-22 18:52:30 - main - INFO - lifespan:124 - Shutting down Image Quality Check API...
+2025-09-22 18:54:42 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 18:54:42 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg'}
+2025-09-22 18:55:06 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 18:55:06 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg'}
+2025-09-22 18:55:08 - image_utils - INFO - _optimize_image_for_processing:170 - Resized image from 3000x4000 to 1536x2048 for processing
+2025-09-22 18:55:08 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 3000x4000
+2025-09-22 18:55:10 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 966x1920
+2025-09-22 18:55:20 - main - INFO - lifespan:72 - Starting Image Quality Check API...
+2025-09-22 18:55:24 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 18:55:24 - main - INFO - lifespan:98 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 18:55:24 - main - INFO - lifespan:111 - ImageQualityDetector initialized successfully
+2025-09-22 18:55:24 - main - INFO - lifespan:115 - BlurTypeClassifier initialized successfully
+2025-09-22 18:55:24 - main - INFO - lifespan:124 - Shutting down Image Quality Check API...
+2025-09-22 18:55:34 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Blurred: True, Score: 0.776, Confidence: 0.765
+2025-09-22 18:55:34 - main - INFO - analyze_comprehensive_quality_optimized:470 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg: 1 issues detected
+2025-09-22 18:55:34 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Time: 27.662s
+2025-09-22 18:55:34 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 27.672s
+2025-09-22 18:55:39 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Blurred: True, Score: 0.894, Confidence: 0.777
+2025-09-22 18:55:39 - main - INFO - analyze_comprehensive_quality_optimized:470 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg: 1 issues detected
+2025-09-22 18:55:39 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Time: 57.297s
+2025-09-22 18:55:39 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 57.314s
+2025-09-22 18:55:43 - main - INFO - lifespan:124 - Shutting down Image Quality Check API...

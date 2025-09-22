@@ -1,2 +1,28 @@
 .idea/
 venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VSCode
+.vscode/
+
+# Docker
+*.log
+*.pid
+*.db
+*.sqlite3
+*.env
+.env.*
+docker-compose.override.yml
+
+# System
+.DS_Store
+Thumbs.db
+
+# Project logs
+logs/
+logs/*.log
