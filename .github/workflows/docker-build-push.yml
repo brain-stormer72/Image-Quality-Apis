@@ -33,12 +33,12 @@ jobs:
           file: Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/imagequality:latest
+            ghcr.io/${{ github.repository }}:latest
 
       - name: Generate artifact attestation
         id: attest
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/${{ github.repository }}/imagequality:latest
+          subject-name: ghcr.io/${{ github.repository }}:latest
           subject-digest: ${{ steps.build.outputs.digest }}
           push-to-registry: true
