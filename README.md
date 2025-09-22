@@ -392,3 +392,71 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues and questions, please create an issue in the repository or contact the development team.
+
+## API Endpoints
+
+### 1. Health Check
+- **GET `/health`**
+  - Returns API status, version, and uptime.
+
+### 2. Blur Detection (with Type Classification)
+- **POST `/analyze-image`**
+  - Request Body:
+    ```json
+    {
+      "image_url": "https://example.com/image.jpg"
+    }
+    ```
+  - Response:
+    ```json
+    {
+      "success": true,
+      "image_url": "https://example.com/image.jpg",
+      "result": {
+        "is_blurred": true,
+        "blur_score": 0.85,
+        "confidence": 0.92,
+        "processing_time_ms": 120,
+        "blur_type_details": {
+          "blur_type": "motion_blur",
+          "type_confidence": 0.88,
+          "motion_score": 0.9,
+          "gaussian_score": 0.1,
+          "defocus_score": 0.0,
+          "analysis_reason": "High motion blur detected"
+        }
+      },
+      "error": null
+    }
+    ```
+
+### 3. Comprehensive Quality Analysis
+- **POST `/analyze-quality`**
+  - Request Body:
+    ```json
+    {
+      "image_url": "https://example.com/image.jpg"
+    }
+    ```
+  - Response: Includes blur, exposure, saturation, overall score, and detected issues.
+
+### 4. Batch Blur Detection
+- **POST `/analyze-batch`**
+  - Request Body:
+    ```json
+    {
+      "image_urls": [
+        "https://example.com/image1.jpg",
+        "https://example.com/image2.png"
+      ]
+    }
+    ```
+
+### 5. Cache Management
+- **GET `/cache/stats`**: Returns cache statistics.
+- **POST `/cache/clear`**: Clears all cached results.
+
+## Usage
+
+- All endpoints accept only JPG, JPEG, PNG image URLs.
+- See `/docs` or `/redoc` for full OpenAPI documentation and schema details.
