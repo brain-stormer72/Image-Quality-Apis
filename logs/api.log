@@ -1,0 +1,1075 @@
+2025-09-22 13:47:12 - __main__ - INFO - lifespan:48 - Starting Image Quality Check API...
+2025-09-22 13:47:12 - __main__ - INFO - lifespan:61 - BlurDetector initialized successfully
+2025-09-22 13:53:29 - middleware - INFO - dispatch:116 - Request: GET /health from 127.0.0.1
+2025-09-22 13:53:29 - middleware - INFO - dispatch:124 - Response: 200 for /health in 0.003s
+2025-09-22 13:53:29 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:53:29 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 0.002s
+2025-09-22 13:53:29 - middleware - INFO - dispatch:116 - Request: POST /analyze-batch from 127.0.0.1
+2025-09-22 13:53:29 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-batch in 0.003s
+2025-09-22 13:53:29 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:53:29 - middleware - INFO - dispatch:124 - Response: 422 for /analyze-image in 0.004s
+2025-09-22 13:53:29 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:53:29 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 0.002s
+2025-09-22 13:56:21 - __main__ - INFO - lifespan:48 - Starting Image Quality Check API...
+2025-09-22 13:56:21 - __main__ - INFO - lifespan:61 - BlurDetector initialized successfully
+2025-09-22 13:58:15 - middleware - INFO - dispatch:116 - Request: POST /api/analyze-image from 127.0.0.1
+2025-09-22 13:58:15 - middleware - INFO - dispatch:124 - Response: 404 for /api/analyze-image in 0.002s
+2025-09-22 13:58:23 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:58:23 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 13:58:23 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 13:58:24 - image_utils - ERROR - download_image_from_url:124 - Unexpected error downloading image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: URL does not point to an image. Content-Type: application/octet-stream
+2025-09-22 13:58:24 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: Unexpected error: URL does not point to an image. Content-Type: application/octet-stream, Time: 1.272s
+2025-09-22 13:58:24 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 1.290s
+2025-09-22 13:58:59 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:58:59 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 13:58:59 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 13:59:01 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 13:59:02 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 13:59:02 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.049s
+2025-09-22 13:59:02 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.052s
+2025-09-22 13:59:12 - middleware - INFO - dispatch:116 - Request: GET /health from 127.0.0.1
+2025-09-22 13:59:12 - middleware - INFO - dispatch:124 - Response: 200 for /health in 0.001s
+2025-09-22 13:59:12 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:59:12 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 13:59:12 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 13:59:16 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 13:59:16 - image_quality_api - ERROR - log_error:81 - API Error - Endpoint: analyze_image, Error: dct matrices are already defined. Redefinition is not allowed., Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 13:59:16 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: dct matrices are already defined. Redefinition is not allowed., Time: 3.510s
+2025-09-22 13:59:16 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.515s
+2025-09-22 13:59:16 - middleware - INFO - dispatch:116 - Request: POST /analyze-batch from 127.0.0.1
+2025-09-22 13:59:16 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 13:59:16 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 13:59:19 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 13:59:19 - image_quality_api - ERROR - log_error:81 - API Error - Endpoint: analyze_image, Error: dct matrices are already defined. Redefinition is not allowed., Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 13:59:19 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: dct matrices are already defined. Redefinition is not allowed., Time: 3.089s
+2025-09-22 13:59:19 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 13:59:19 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/png
+2025-09-22 13:59:23 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/png: (100, 100)
+2025-09-22 13:59:23 - image_quality_api - ERROR - log_error:81 - API Error - Endpoint: analyze_image, Error: dct matrices are already defined. Redefinition is not allowed., Context: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 13:59:23 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://httpbin.org/image/png, Error: dct matrices are already defined. Redefinition is not allowed., Time: 3.929s
+2025-09-22 13:59:23 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-batch in 7.025s
+2025-09-22 13:59:23 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:59:23 - middleware - INFO - dispatch:124 - Response: 422 for /analyze-image in 0.006s
+2025-09-22 13:59:23 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 13:59:23 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/status/404'}
+2025-09-22 13:59:23 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/status/404
+2025-09-22 13:59:26 - image_utils - ERROR - download_image_from_url:121 - Failed to download image from https://httpbin.org/status/404: 404 Client Error: NOT FOUND for url: https://httpbin.org/status/404
+2025-09-22 13:59:26 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://httpbin.org/status/404, Error: Failed to download image: 404 Client Error: NOT FOUND for url: https://httpbin.org/status/404, Time: 3.177s
+2025-09-22 13:59:26 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.184s
+2025-09-22 14:00:14 - __main__ - INFO - lifespan:62 - Starting Image Quality Check API...
+2025-09-22 14:00:14 - __main__ - INFO - lifespan:75 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 14:00:19 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:00:19 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:00:19 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:00:21 - image_utils - ERROR - download_image_from_url:124 - Unexpected error downloading image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: URL does not point to an image. Content-Type: application/octet-stream
+2025-09-22 14:00:21 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: Unexpected error: URL does not point to an image. Content-Type: application/octet-stream, Time: 1.474s
+2025-09-22 14:00:21 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 1.481s
+2025-09-22 14:00:39 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:00:39 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:00:39 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:00:42 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:00:42 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:00:42 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.959s
+2025-09-22 14:00:42 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 2.963s
+2025-09-22 14:00:52 - middleware - INFO - dispatch:116 - Request: GET /health from 127.0.0.1
+2025-09-22 14:00:52 - middleware - INFO - dispatch:124 - Response: 200 for /health in 0.002s
+2025-09-22 14:00:52 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:00:52 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:00:52 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:00:54 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:00:54 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:00:54 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.304s
+2025-09-22 14:00:54 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 2.307s
+2025-09-22 14:00:54 - middleware - INFO - dispatch:116 - Request: POST /analyze-batch from 127.0.0.1
+2025-09-22 14:00:54 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:00:54 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:00:58 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:00:58 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:00:58 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.915s
+2025-09-22 14:00:58 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 14:00:58 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/image/png
+2025-09-22 14:01:00 - image_utils - INFO - validate_and_convert_image:166 - Successfully processed image from https://httpbin.org/image/png: (100, 100)
+2025-09-22 14:01:00 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/png, Blurred: False, Score: 0.628, Confidence: 0.739
+2025-09-22 14:01:00 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/png, Time: 2.219s
+2025-09-22 14:01:00 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-batch in 6.139s
+2025-09-22 14:01:00 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:01:00 - middleware - INFO - dispatch:124 - Response: 422 for /analyze-image in 0.003s
+2025-09-22 14:01:00 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:01:00 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/status/404'}
+2025-09-22 14:01:00 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://httpbin.org/status/404
+2025-09-22 14:01:02 - image_utils - ERROR - download_image_from_url:121 - Failed to download image from https://httpbin.org/status/404: 404 Client Error: NOT FOUND for url: https://httpbin.org/status/404
+2025-09-22 14:01:02 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://httpbin.org/status/404, Error: Failed to download image: 404 Client Error: NOT FOUND for url: https://httpbin.org/status/404, Time: 2.219s
+2025-09-22 14:01:02 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 2.224s
+2025-09-22 14:01:20 - middleware - INFO - dispatch:116 - Request: GET /docs from 127.0.0.1
+2025-09-22 14:01:20 - middleware - INFO - dispatch:124 - Response: 200 for /docs in 0.001s
+2025-09-22 14:01:21 - middleware - INFO - dispatch:116 - Request: GET /openapi.json from 127.0.0.1
+2025-09-22 14:01:21 - middleware - INFO - dispatch:124 - Response: 200 for /openapi.json in 0.016s
+2025-09-22 14:01:33 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:01:33 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:01:33 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:01:35 - image_utils - ERROR - download_image_from_url:124 - Unexpected error downloading image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: URL does not point to an image. Content-Type: application/octet-stream
+2025-09-22 14:01:35 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: Unexpected error: URL does not point to an image. Content-Type: application/octet-stream, Time: 1.434s
+2025-09-22 14:01:35 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 1.440s
+2025-09-22 14:02:22 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:02:22 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:02:22 - image_utils - INFO - download_image_from_url:83 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:02:23 - image_utils - ERROR - download_image_from_url:124 - Unexpected error downloading image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: URL does not point to an image. Content-Type: application/octet-stream
+2025-09-22 14:02:23 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: Unexpected error: URL does not point to an image. Content-Type: application/octet-stream, Time: 1.268s
+2025-09-22 14:02:23 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 1.272s
+2025-09-22 14:04:15 - __main__ - INFO - lifespan:62 - Starting Image Quality Check API...
+2025-09-22 14:04:15 - __main__ - INFO - lifespan:75 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 14:05:12 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:05:12 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:05:12 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:05:16 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: (4032, 3024)
+2025-09-22 14:06:00 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Blurred: True, Score: 0.971, Confidence: 0.870
+2025-09-22 14:06:00 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Time: 48.103s
+2025-09-22 14:06:00 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 48.117s
+2025-09-22 14:06:46 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:06:46 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:06:46 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:06:49 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: (4032, 3024)
+2025-09-22 14:07:37 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Blurred: True, Score: 0.971, Confidence: 0.870
+2025-09-22 14:07:37 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Time: 51.391s
+2025-09-22 14:07:37 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 51.402s
+2025-09-22 14:08:06 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:08:06 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:08:06 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:08:10 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: (4032, 3024)
+2025-09-22 14:08:58 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Blurred: True, Score: 0.971, Confidence: 0.870
+2025-09-22 14:08:58 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Time: 51.766s
+2025-09-22 14:08:58 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 51.775s
+2025-09-22 14:10:35 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:10:35 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 14:10:35 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 14:10:36 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 14:10:38 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 14:10:38 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.343s
+2025-09-22 14:10:38 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.347s
+2025-09-22 14:10:42 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:10:42 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 14:10:42 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 14:10:43 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 14:10:45 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 14:10:45 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 2.822s
+2025-09-22 14:10:45 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 2.827s
+2025-09-22 14:25:43 - __main__ - INFO - lifespan:66 - Starting Image Quality Check API...
+2025-09-22 14:25:43 - __main__ - INFO - lifespan:79 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 14:25:43 - __main__ - INFO - lifespan:92 - ImageQualityDetector initialized successfully
+2025-09-22 14:25:43 - __main__ - INFO - lifespan:101 - Shutting down Image Quality Check API...
+2025-09-22 14:26:10 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:26:10 - middleware - INFO - dispatch:124 - Response: 404 for /analyze-quality in 0.019s
+2025-09-22 14:28:39 - __main__ - INFO - lifespan:66 - Starting Image Quality Check API...
+2025-09-22 14:28:39 - __main__ - INFO - lifespan:79 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 14:28:39 - __main__ - INFO - lifespan:92 - ImageQualityDetector initialized successfully
+2025-09-22 14:29:28 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:29:28 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 14:29:28 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 14:29:30 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 14:29:31 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 14:29:31 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.189s
+2025-09-22 14:29:31 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.204s
+2025-09-22 14:29:48 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:29:48 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:29:48 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:29:51 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: (4032, 3024)
+2025-09-22 14:29:51 - image_quality_api - ERROR - log_error:81 - API Error - Endpoint: analyze_comprehensive, Error: name 'cv2' is not defined, Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:29:51 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: name 'cv2' is not defined, Time: 3.100s
+2025-09-22 14:29:51 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.106s
+2025-09-22 14:31:17 - __main__ - INFO - lifespan:67 - Starting Image Quality Check API...
+2025-09-22 14:31:17 - __main__ - INFO - lifespan:80 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 14:31:17 - __main__ - INFO - lifespan:93 - ImageQualityDetector initialized successfully
+2025-09-22 14:31:18 - middleware - INFO - dispatch:116 - Request: GET /docs from 127.0.0.1
+2025-09-22 14:31:18 - middleware - INFO - dispatch:124 - Response: 200 for /docs in 0.002s
+2025-09-22 14:31:19 - middleware - INFO - dispatch:116 - Request: GET /openapi.json from 127.0.0.1
+2025-09-22 14:31:19 - middleware - INFO - dispatch:124 - Response: 200 for /openapi.json in 0.026s
+2025-09-22 14:31:58 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:31:58 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:31:58 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:32:01 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: (4032, 3024)
+2025-09-22 14:32:48 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:32:49 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: underexposure, undersaturation
+2025-09-22 14:32:49 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Blurred: True, Score: 0.971, Confidence: 0.870
+2025-09-22 14:32:49 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: 3 issues detected
+2025-09-22 14:32:49 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Time: 50.914s
+2025-09-22 14:32:49 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 50.928s
+2025-09-22 14:33:19 - middleware - INFO - dispatch:116 - Request: GET /health from 127.0.0.1
+2025-09-22 14:33:19 - middleware - INFO - dispatch:124 - Response: 200 for /health in 0.001s
+2025-09-22 14:33:19 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:33:19 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:33:19 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:33:32 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:33:32 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:33:32 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 12.636s
+2025-09-22 14:33:32 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 12.641s
+2025-09-22 14:33:32 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:33:32 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:33:32 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:33:34 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:33:34 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:33:34 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: undersaturation
+2025-09-22 14:33:34 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:33:34 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 14:33:34 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.370s
+2025-09-22 14:33:34 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.376s
+2025-09-22 14:33:34 - middleware - INFO - dispatch:116 - Request: POST /analyze-batch from 127.0.0.1
+2025-09-22 14:33:34 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:33:34 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:33:36 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:33:37 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:33:37 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.410s
+2025-09-22 14:33:37 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 14:33:37 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/image/png
+2025-09-22 14:33:50 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://httpbin.org/image/png: (100, 100)
+2025-09-22 14:33:50 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/png, Blurred: False, Score: 0.628, Confidence: 0.739
+2025-09-22 14:33:50 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/png, Time: 13.149s
+2025-09-22 14:33:50 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-batch in 15.565s
+2025-09-22 14:33:50 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:33:50 - middleware - INFO - dispatch:124 - Response: 422 for /analyze-image in 0.011s
+2025-09-22 14:33:50 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 14:33:50 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/status/404'}
+2025-09-22 14:33:50 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/status/404
+2025-09-22 14:33:53 - image_utils - ERROR - download_image_from_url:138 - Failed to download image from https://httpbin.org/status/404: 404 Client Error: NOT FOUND for url: https://httpbin.org/status/404
+2025-09-22 14:33:53 - image_quality_api - WARNING - log_image_processing:88 - Image Processing Failed - URL: https://httpbin.org/status/404, Error: Failed to download image: 404 Client Error: NOT FOUND for url: https://httpbin.org/status/404, Time: 2.801s
+2025-09-22 14:33:53 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 2.807s
+2025-09-22 14:34:37 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality-batch from 127.0.0.1
+2025-09-22 14:34:37 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 14:34:37 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 14:34:40 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 14:34:40 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:34:40 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: undersaturation
+2025-09-22 14:34:40 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 14:34:40 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 14:34:40 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.234s
+2025-09-22 14:34:40 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 14:34:40 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://httpbin.org/image/png
+2025-09-22 14:34:43 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://httpbin.org/image/png: (100, 100)
+2025-09-22 14:34:43 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:34:43 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: overexposure, underexposure, undersaturation
+2025-09-22 14:34:43 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://httpbin.org/image/png, Blurred: False, Score: 0.628, Confidence: 0.739
+2025-09-22 14:34:43 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://httpbin.org/image/png: 3 issues detected
+2025-09-22 14:34:43 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://httpbin.org/image/png, Time: 2.289s
+2025-09-22 14:34:43 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality-batch in 5.530s
+2025-09-22 14:34:53 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:34:53 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 14:34:53 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC
+2025-09-22 14:34:57 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: (4032, 3024)
+2025-09-22 14:35:43 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:35:43 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: underexposure, undersaturation
+2025-09-22 14:35:43 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Blurred: True, Score: 0.971, Confidence: 0.870
+2025-09-22 14:35:43 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: 3 issues detected
+2025-09-22 14:35:43 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Time: 50.004s
+2025-09-22 14:35:43 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 50.017s
+2025-09-22 14:35:43 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:35:43 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 14:35:43 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 14:35:44 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 14:35:45 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:35:45 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: undersaturation
+2025-09-22 14:35:45 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 14:35:45 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 2 issues detected
+2025-09-22 14:35:45 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 2.198s
+2025-09-22 14:35:45 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.204s
+2025-09-22 14:35:56 - middleware - INFO - dispatch:116 - Request: GET /docs from 127.0.0.1
+2025-09-22 14:35:56 - middleware - INFO - dispatch:124 - Response: 200 for /docs in 0.001s
+2025-09-22 14:35:57 - middleware - INFO - dispatch:116 - Request: GET /openapi.json from 127.0.0.1
+2025-09-22 14:35:57 - middleware - INFO - dispatch:124 - Response: 200 for /openapi.json in 0.002s
+2025-09-22 14:36:13 - middleware - INFO - dispatch:116 - Request: GET /docs from 127.0.0.1
+2025-09-22 14:36:13 - middleware - INFO - dispatch:124 - Response: 200 for /docs in 0.002s
+2025-09-22 14:36:13 - middleware - INFO - dispatch:116 - Request: GET /openapi.json from 127.0.0.1
+2025-09-22 14:36:13 - middleware - INFO - dispatch:124 - Response: 200 for /openapi.json in 0.001s
+2025-09-22 14:37:02 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 14:37:02 - image_quality_api - INFO - log_request:73 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 14:37:02 - image_utils - INFO - download_image_from_url:95 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 14:37:03 - image_utils - INFO - validate_and_convert_image:183 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 14:37:05 - quality_detectors - INFO - analyze_comprehensive_quality:266 - Starting comprehensive image quality analysis
+2025-09-22 14:37:05 - quality_detectors - INFO - analyze_comprehensive_quality:278 - Quality issues detected: undersaturation
+2025-09-22 14:37:05 - image_quality_api - INFO - log_blur_detection:92 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 14:37:05 - __main__ - INFO - analyze_comprehensive_quality:371 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 2 issues detected
+2025-09-22 14:37:05 - image_quality_api - INFO - log_image_processing:86 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.239s
+2025-09-22 14:37:05 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.243s
+2025-09-22 15:01:36 - __main__ - INFO - lifespan:69 - Starting Image Quality Check API...
+2025-09-22 15:01:40 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:01:40 - __main__ - INFO - lifespan:95 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:01:40 - __main__ - INFO - lifespan:108 - ImageQualityDetector initialized successfully
+2025-09-22 15:03:57 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:03:57 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:03:59 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: Failed to process image: name 'MAX_IMAGE_DIMENSION' is not defined, Time: 1.551s
+2025-09-22 15:03:59 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.555s
+2025-09-22 15:08:32 - __main__ - INFO - lifespan:69 - Starting Image Quality Check API...
+2025-09-22 15:08:36 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:08:36 - __main__ - INFO - lifespan:95 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:08:36 - __main__ - INFO - lifespan:108 - ImageQualityDetector initialized successfully
+2025-09-22 15:15:58 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:15:59 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:01 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:16:01 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: name 'asyncio' is not defined, Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:01 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: name 'asyncio' is not defined, Time: 2.236s
+2025-09-22 15:16:01 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.249s
+2025-09-22 15:16:03 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality-batch from 127.0.0.1
+2025-09-22 15:16:03 - middleware - ERROR - dispatch:133 - Request failed: /analyze-quality-batch in 0.002s - name 'asyncio' is not defined
+2025-09-22 15:16:03 - __main__ - ERROR - global_exception_handler:718 - Unhandled exception: name 'asyncio' is not defined
+2025-09-22 15:16:05 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:16:05 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:16:05 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:16:05 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:05 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:05 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:07 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:16:07 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: name 'asyncio' is not defined, Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:07 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: name 'asyncio' is not defined, Time: 2.244s
+2025-09-22 15:16:07 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.250s
+2025-09-22 15:16:10 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:16:10 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: name 'asyncio' is not defined, Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:10 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: name 'asyncio' is not defined, Time: 4.647s
+2025-09-22 15:16:10 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 4.654s
+2025-09-22 15:16:10 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:16:10 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: name 'asyncio' is not defined, Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:16:10 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: name 'asyncio' is not defined, Time: 4.853s
+2025-09-22 15:16:10 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 4.859s
+2025-09-22 15:16:12 - middleware - INFO - dispatch:116 - Request: GET /cache/stats from 127.0.0.1
+2025-09-22 15:16:12 - middleware - INFO - dispatch:124 - Response: 200 for /cache/stats in 0.001s
+2025-09-22 15:21:04 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:21:08 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:21:08 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:21:08 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:21:29 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:21:29 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:39 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:21:39 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:39 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 10.158s
+2025-09-22 15:21:39 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 10.160s
+2025-09-22 15:21:41 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality-batch from 127.0.0.1
+2025-09-22 15:21:41 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:41 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 15:21:41 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/webp'}
+2025-09-22 15:21:43 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 100x100
+2025-09-22 15:21:43 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 15:21:43 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/png, Error: too many values to unpack (expected 2), Time: 1.334s
+2025-09-22 15:21:43 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 274x367
+2025-09-22 15:21:43 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/webp'}
+2025-09-22 15:21:43 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/webp, Error: too many values to unpack (expected 2), Time: 1.586s
+2025-09-22 15:21:43 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:21:43 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:43 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 2.199s
+2025-09-22 15:21:43 - __main__ - INFO - analyze_quality_batch:706 - Batch processing completed: 0 successful, 3 failed
+2025-09-22 15:21:43 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality-batch in 2.203s
+2025-09-22 15:21:45 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:21:45 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:21:45 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:21:45 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:45 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:45 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:47 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:21:47 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:47 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 1.614s
+2025-09-22 15:21:47 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.623s
+2025-09-22 15:21:47 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:21:47 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:47 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 1.912s
+2025-09-22 15:21:47 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.920s
+2025-09-22 15:21:51 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:21:51 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:21:51 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 5.666s
+2025-09-22 15:21:51 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 5.675s
+2025-09-22 15:21:53 - middleware - INFO - dispatch:116 - Request: GET /cache/stats from 127.0.0.1
+2025-09-22 15:21:53 - middleware - INFO - dispatch:124 - Response: 200 for /cache/stats in 0.001s
+2025-09-22 15:24:39 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:24:43 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:24:43 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:24:43 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:25:04 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:25:04 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:25:05 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:25:05 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:25:05 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.397s
+2025-09-22 15:25:05 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.401s
+2025-09-22 15:25:15 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:25:15 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:25:15 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:25:15 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:25:15 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.312s
+2025-09-22 15:25:15 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.315s
+2025-09-22 15:25:26 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:25:26 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:29 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:25:29 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:29 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 2.512s
+2025-09-22 15:25:29 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.516s
+2025-09-22 15:25:31 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality-batch from 127.0.0.1
+2025-09-22 15:25:31 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:31 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 15:25:31 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/webp'}
+2025-09-22 15:25:32 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:25:33 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:33 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 1.787s
+2025-09-22 15:25:34 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 100x100
+2025-09-22 15:25:34 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 15:25:34 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/png, Error: too many values to unpack (expected 2), Time: 3.298s
+2025-09-22 15:25:41 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 274x367
+2025-09-22 15:25:41 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/webp'}
+2025-09-22 15:25:41 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/webp, Error: too many values to unpack (expected 2), Time: 10.646s
+2025-09-22 15:25:41 - __main__ - INFO - analyze_quality_batch:708 - Batch processing completed: 0 successful, 3 failed
+2025-09-22 15:25:41 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality-batch in 10.650s
+2025-09-22 15:25:43 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:25:43 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:25:43 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:25:43 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:43 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:43 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:46 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:25:46 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:46 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 2.473s
+2025-09-22 15:25:46 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.478s
+2025-09-22 15:25:46 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:25:46 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:46 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 2.909s
+2025-09-22 15:25:46 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.914s
+2025-09-22 15:25:46 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:25:46 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:25:46 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 3.006s
+2025-09-22 15:25:46 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.010s
+2025-09-22 15:25:48 - middleware - INFO - dispatch:116 - Request: GET /cache/stats from 127.0.0.1
+2025-09-22 15:25:48 - middleware - INFO - dispatch:124 - Response: 200 for /cache/stats in 0.001s
+2025-09-22 15:28:43 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 15:28:43 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:28:43 - image_utils - INFO - download_image_from_url:269 - Downloading image from URL: https://httpbin.org/image/jpeg
+2025-09-22 15:28:46 - image_utils - INFO - validate_and_convert_image:358 - Successfully processed image from https://httpbin.org/image/jpeg: (178, 239)
+2025-09-22 15:28:46 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:28:46 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.095s
+2025-09-22 15:28:46 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.100s
+2025-09-22 15:29:46 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:29:50 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:29:50 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:29:50 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:30:17 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:30:17 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:30:22 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:30:22 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:30:22 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 4.685s
+2025-09-22 15:30:22 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 4.688s
+2025-09-22 15:33:21 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:33:25 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:33:25 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:33:25 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:33:33 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:33:33 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:33:34 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:33:34 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:33:34 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.332s
+2025-09-22 15:33:34 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.335s
+2025-09-22 15:33:52 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:33:52 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:34:07 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:34:07 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:34:07 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 15.182s
+2025-09-22 15:34:07 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 15.185s
+2025-09-22 15:35:57 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:35:57 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:36:01 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:36:01 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:36:01 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:36:09 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:36:09 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:36:09 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:36:09 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:36:09 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.319s
+2025-09-22 15:36:09 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.323s
+2025-09-22 15:36:25 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:36:25 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:36:29 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:36:29 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:36:29 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: too many values to unpack (expected 2), Time: 3.195s
+2025-09-22 15:36:29 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.197s
+2025-09-22 15:37:56 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:37:56 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:38:00 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:38:00 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:38:00 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:38:10 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:38:10 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:38:10 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:38:10 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:38:10 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:38:10 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:38:10 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.308s
+2025-09-22 15:38:10 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.312s
+2025-09-22 15:38:28 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:38:28 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:38:28 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:38:29 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://httpbin.org/image/jpeg, Error: HTTP 502: Failed to download image from https://httpbin.org/image/jpeg, Time: 1.284s
+2025-09-22 15:38:29 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.286s
+2025-09-22 15:39:30 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:39:30 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:39:35 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:39:35 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:39:35 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:41:07 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:41:07 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:41:07 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:41:08 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:41:08 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:41:08 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:351 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:41:08 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - About to create parallel tasks
+2025-09-22 15:41:08 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - Created parallel tasks
+2025-09-22 15:41:08 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:41:08 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.358s
+2025-09-22 15:41:08 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.365s
+2025-09-22 15:42:42 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:42:42 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:42:46 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:42:46 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:42:46 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:46:49 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:46:49 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:46:49 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:46:49 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:46:49 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:46:49 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:351 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:46:49 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - About to create parallel tasks
+2025-09-22 15:46:49 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - Created parallel tasks
+2025-09-22 15:46:49 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:363 - About to await asyncio.gather
+2025-09-22 15:46:49 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:46:49 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.592s
+2025-09-22 15:46:49 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.596s
+2025-09-22 15:47:29 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:47:29 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:47:33 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:47:33 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:47:33 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:49:05 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:49:05 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:49:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:49:05 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:49:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:49:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:351 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:49:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - About to create parallel tasks
+2025-09-22 15:49:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - Created parallel tasks
+2025-09-22 15:49:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:363 - About to run blur detection
+2025-09-22 15:49:06 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:49:06 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.518s
+2025-09-22 15:49:06 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.522s
+2025-09-22 15:49:19 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:49:19 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:49:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:49:19 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:49:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:49:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:351 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:49:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - About to create parallel tasks
+2025-09-22 15:49:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - Created parallel tasks
+2025-09-22 15:49:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:363 - About to run blur detection
+2025-09-22 15:49:19 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:49:19 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.318s
+2025-09-22 15:49:19 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.320s
+2025-09-22 15:49:57 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:49:57 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:50:01 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:50:01 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:50:01 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:50:05 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:50:05 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:50:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:50:05 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:50:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:50:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:351 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:50:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - About to create parallel tasks
+2025-09-22 15:50:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - Created parallel tasks
+2025-09-22 15:50:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:363 - About to run blur detection synchronously
+2025-09-22 15:50:05 - image_quality_api - ERROR - log_error:82 - API Error - Endpoint: analyze_comprehensive, Error: too many values to unpack (expected 2), Context: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:50:05 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Error: too many values to unpack (expected 2), Time: 0.387s
+2025-09-22 15:50:05 - asyncio - ERROR - default_exception_handler:1819 - Future exception was never retrieved
+future: <Future finished exception=ValueError('too many values to unpack (expected 2)')>
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mayan\OneDrive\Desktop\image-quality-check-apis\main.py", line 47, in detectBlur
+    return detector.detectBlur(image)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mayan\OneDrive\Desktop\image-quality-check-apis\BlurDetector.py", line 172, in detectBlur
+    ori_rows, ori_cols = np.shape(img)
+    ^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)
+2025-09-22 15:50:05 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 0.426s
+2025-09-22 15:51:09 - asyncio - DEBUG - __init__:634 - Using proactor: IocpProactor
+2025-09-22 15:51:10 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:51:14 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:51:14 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:51:14 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:51:19 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:51:19 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:51:19 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:51:20 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:51:20 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:51:20 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (480, 720)
+2025-09-22 15:51:20 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:51:20 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:51:20 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:51:20 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (480, 720)
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:51:21 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:51:21 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (480, 720)
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:51:21 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:51:21 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 15:51:21 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 15:51:21 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 1.491s
+2025-09-22 15:51:21 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.495s
+2025-09-22 15:51:40 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:51:40 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:51:40 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:51:41 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:51:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:51:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (480, 720)
+2025-09-22 15:51:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:51:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:51:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:51:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (480, 720)
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:51:42 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:51:42 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (480, 720)
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:51:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:51:42 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 15:51:42 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 15:51:42 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 1.560s
+2025-09-22 15:51:42 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.564s
+2025-09-22 15:52:32 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:52:32 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:52:32 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:33 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:52:33 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (480, 720, 3)
+2025-09-22 15:52:33 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (480, 720)
+2025-09-22 15:52:33 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (480, 720, 3)
+2025-09-22 15:52:33 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:33 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:33 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (480, 720)
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:34 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:34 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (480, 720)
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:34 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:34 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 15:52:34 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 15:52:34 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 1.573s
+2025-09-22 15:52:34 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.575s
+2025-09-22 15:52:36 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality-batch from 127.0.0.1
+2025-09-22 15:52:36 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:52:36 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:36 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 15:52:36 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:36 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/webp'}
+2025-09-22 15:52:36 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:37 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 274x367
+2025-09-22 15:52:37 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (367, 274, 3)
+2025-09-22 15:52:37 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (367, 274)
+2025-09-22 15:52:37 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (367, 274, 3)
+2025-09-22 15:52:37 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:37 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:37 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (367, 274)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:38 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:38 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (367, 274)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:38 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/webp, Blurred: True, Score: 0.804, Confidence: 0.724
+2025-09-22 15:52:38 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://httpbin.org/image/webp: 4 issues detected
+2025-09-22 15:52:38 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/webp, Time: 1.894s
+2025-09-22 15:52:38 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 100x100
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (100, 100, 3)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (100, 100)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (100, 100, 3)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (100, 100)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:38 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:38 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (100, 100)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:38 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/png, Blurred: False, Score: 0.628, Confidence: 0.739
+2025-09-22 15:52:38 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://httpbin.org/image/png: 2 issues detected
+2025-09-22 15:52:38 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/png, Time: 2.396s
+2025-09-22 15:52:38 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (178, 239, 3)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (178, 239)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (178, 239, 3)
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:38 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (178, 239)
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:39 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:39 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (178, 239)
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:39 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:39 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:52:39 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:52:39 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.594s
+2025-09-22 15:52:39 - __main__ - INFO - analyze_quality_batch:732 - Batch processing completed: 3 successful, 0 failed
+2025-09-22 15:52:39 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality-batch in 2.598s
+2025-09-22 15:52:41 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:52:41 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:52:41 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:52:41 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:52:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:41 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:52:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:41 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:52:41 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:52:42 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (178, 239, 3)
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (178, 239)
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (178, 239, 3)
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (178, 239)
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:42 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:42 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (178, 239)
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:42 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:42 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:52:42 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:52:42 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 1.766s
+2025-09-22 15:52:42 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.772s
+2025-09-22 15:52:43 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (178, 239, 3)
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (178, 239)
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (178, 239, 3)
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (178, 239)
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:43 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:43 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (178, 239)
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:43 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:43 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:52:43 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:52:43 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.527s
+2025-09-22 15:52:43 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.533s
+2025-09-22 15:52:44 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (178, 239, 3)
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (178, 239)
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (178, 239, 3)
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (178, 239)
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:52:44 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:52:44 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (178, 239)
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:52:44 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:52:44 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:52:44 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:52:44 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.287s
+2025-09-22 15:52:44 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.294s
+2025-09-22 15:52:46 - middleware - INFO - dispatch:116 - Request: GET /cache/stats from 127.0.0.1
+2025-09-22 15:52:46 - middleware - INFO - dispatch:124 - Response: 200 for /cache/stats in 0.001s
+2025-09-22 15:53:04 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:53:04 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png'}
+2025-09-22 15:53:04 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:341 - About to download image asynchronously
+2025-09-22 15:53:05 - image_utils - INFO - _optimize_image_for_processing:182 - Resized image from 1919x4268 to 920x2048 for processing
+2025-09-22 15:53:05 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 1919x4268
+2025-09-22 15:53:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:343 - Downloaded image shape: (2048, 920, 3)
+2025-09-22 15:53:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:355 - image_gray shape: (2048, 920)
+2025-09-22 15:53:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:356 - image_bgr shape: (2048, 920, 3)
+2025-09-22 15:53:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:360 - About to create parallel tasks
+2025-09-22 15:53:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:365 - Created parallel tasks
+2025-09-22 15:53:05 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:368 - About to await asyncio.gather
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:370 - asyncio.gather completed, results length: 2
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:373 - Blur detection completed, blur_map type: <class 'numpy.ndarray'>
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:374 - Quality analysis completed, quality_results type: <class 'dict'>
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:377 - blur_map type: <class 'numpy.ndarray'>, shape: (2048, 920)
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:378 - quality_results type: <class 'dict'>
+2025-09-22 15:53:13 - __main__ - DEBUG - calculate_blur_metrics:169 - calculate_blur_metrics input type: <class 'numpy.ndarray'>
+2025-09-22 15:53:13 - __main__ - DEBUG - calculate_blur_metrics:171 - blur_map shape: (2048, 920)
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:397 - quality_results keys: ['overexposure', 'underexposure', 'oversaturation', 'undersaturation']
+2025-09-22 15:53:13 - __main__ - DEBUG - analyze_comprehensive_quality_optimized:398 - quality_results items: [('overexposure', <class 'quality_detectors.QualityResult'>), ('underexposure', <class 'quality_detectors.QualityResult'>), ('oversaturation', <class 'quality_detectors.QualityResult'>), ('undersaturation', <class 'quality_detectors.QualityResult'>)]
+2025-09-22 15:53:13 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Blurred: False, Score: 0.580, Confidence: 0.794
+2025-09-22 15:53:13 - __main__ - INFO - analyze_comprehensive_quality_optimized:435 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png: 0 issues detected
+2025-09-22 15:53:13 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Time: 9.337s
+2025-09-22 15:53:13 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 9.342s
+2025-09-22 15:54:35 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:54:39 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:54:39 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:54:39 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:54:53 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:54:53 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png'}
+2025-09-22 15:54:54 - image_utils - INFO - _optimize_image_for_processing:182 - Resized image from 1919x4268 to 920x2048 for processing
+2025-09-22 15:54:54 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 1919x4268
+2025-09-22 15:55:01 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Blurred: False, Score: 0.580, Confidence: 0.794
+2025-09-22 15:55:01 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png: 0 issues detected
+2025-09-22 15:55:01 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Time: 8.324s
+2025-09-22 15:55:01 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 8.333s
+2025-09-22 15:56:24 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:56:24 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 15:56:25 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 720x480
+2025-09-22 15:56:26 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 15:56:26 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 15:56:26 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 1.404s
+2025-09-22 15:56:26 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.407s
+2025-09-22 15:56:28 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality-batch from 127.0.0.1
+2025-09-22 15:56:28 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:56:28 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/png'}
+2025-09-22 15:56:28 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/webp'}
+2025-09-22 15:56:30 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:56:30 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:56:30 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:56:30 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.550s
+2025-09-22 15:56:31 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 100x100
+2025-09-22 15:56:31 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/png, Blurred: False, Score: 0.628, Confidence: 0.739
+2025-09-22 15:56:31 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://httpbin.org/image/png: 2 issues detected
+2025-09-22 15:56:31 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/png, Time: 2.822s
+2025-09-22 15:56:31 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 274x367
+2025-09-22 15:56:32 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/webp, Blurred: True, Score: 0.804, Confidence: 0.724
+2025-09-22 15:56:32 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://httpbin.org/image/webp: 4 issues detected
+2025-09-22 15:56:32 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/webp, Time: 3.811s
+2025-09-22 15:56:32 - __main__ - INFO - analyze_quality_batch:712 - Batch processing completed: 3 successful, 0 failed
+2025-09-22 15:56:32 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality-batch in 3.817s
+2025-09-22 15:56:34 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:56:34 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:56:34 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:56:34 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:56:34 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:56:34 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://httpbin.org/image/jpeg'}
+2025-09-22 15:56:36 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:56:36 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:56:36 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:56:36 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 2.140s
+2025-09-22 15:56:36 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.145s
+2025-09-22 15:56:37 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:56:37 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:56:37 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:56:37 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.231s
+2025-09-22 15:56:37 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.235s
+2025-09-22 15:56:37 - image_utils - INFO - _process_image_data_sync:245 - Successfully processed image: 239x178
+2025-09-22 15:56:37 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://httpbin.org/image/jpeg, Blurred: False, Score: 0.354, Confidence: 0.599
+2025-09-22 15:56:37 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://httpbin.org/image/jpeg: 1 issues detected
+2025-09-22 15:56:37 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://httpbin.org/image/jpeg, Time: 3.575s
+2025-09-22 15:56:37 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.580s
+2025-09-22 15:56:39 - middleware - INFO - dispatch:116 - Request: GET /cache/stats from 127.0.0.1
+2025-09-22 15:56:39 - middleware - INFO - dispatch:124 - Response: 200 for /cache/stats in 0.001s
+2025-09-22 15:56:55 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:56:55 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 15:56:57 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: Failed to process image: name 'pillow_heif' is not defined, Time: 2.496s
+2025-09-22 15:56:58 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.498s
+2025-09-22 15:58:41 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 15:58:46 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 15:58:46 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 15:58:46 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 15:59:14 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 15:59:14 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 15:59:58 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Blurred: True, Score: 0.971, Confidence: 0.870
+2025-09-22 15:59:58 - __main__ - INFO - analyze_comprehensive_quality_optimized:415 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC: 3 issues detected
+2025-09-22 15:59:58 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Time: 44.141s
+2025-09-22 15:59:58 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 44.159s
+2025-09-22 16:04:04 - __main__ - INFO - lifespan:70 - Starting Image Quality Check API...
+2025-09-22 16:04:08 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 16:04:08 - __main__ - INFO - lifespan:96 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 16:04:08 - __main__ - INFO - lifespan:109 - ImageQualityDetector initialized successfully
+2025-09-22 16:04:11 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:04:11 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png'}
+2025-09-22 16:04:13 - image_utils - INFO - _optimize_image_for_processing:170 - Resized image from 1919x4268 to 920x2048 for processing
+2025-09-22 16:04:13 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 1919x4268
+2025-09-22 16:04:19 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Blurred: False, Score: 0.580, Confidence: 0.794
+2025-09-22 16:04:19 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png: 0 issues detected
+2025-09-22 16:04:19 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Time: 8.040s
+2025-09-22 16:04:19 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 8.048s
+2025-09-22 16:04:35 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:04:35 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:04:35 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 720x480
+2025-09-22 16:04:36 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:04:36 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 16:04:36 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 1.340s
+2025-09-22 16:04:36 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.343s
+2025-09-22 16:04:45 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:04:45 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC'}
+2025-09-22 16:04:48 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/IMG_1766.HEIC, Error: Failed to process image: cannot identify image file <_io.BytesIO object at 0x00000174AAF38A40>, Time: 2.660s
+2025-09-22 16:04:48 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.663s
+2025-09-22 16:08:09 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:08:09 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_16999.jpg'}
+2025-09-22 16:08:09 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 362x640
+2025-09-22 16:08:10 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_16999.jpg, Blurred: True, Score: 0.998, Confidence: 0.743
+2025-09-22 16:08:10 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_16999.jpg: 2 issues detected
+2025-09-22 16:08:10 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_16999.jpg, Time: 1.459s
+2025-09-22 16:08:10 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.463s
+2025-09-22 16:11:35 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:11:35 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_18187.jpg'}
+2025-09-22 16:11:36 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 362x640
+2025-09-22 16:11:38 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_18187.jpg, Blurred: True, Score: 0.991, Confidence: 0.757
+2025-09-22 16:11:38 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_18187.jpg: 3 issues detected
+2025-09-22 16:11:38 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_18187.jpg, Time: 2.584s
+2025-09-22 16:11:38 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.589s
+2025-09-22 16:12:11 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:12:11 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg'}
+2025-09-22 16:12:12 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 640x480
+2025-09-22 16:12:13 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg, Blurred: True, Score: 0.986, Confidence: 0.696
+2025-09-22 16:12:13 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg: 1 issues detected
+2025-09-22 16:12:13 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg, Time: 2.101s
+2025-09-22 16:12:13 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.105s
+2025-09-22 16:26:10 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:26:10 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg'}
+2025-09-22 16:26:10 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 640x480
+2025-09-22 16:26:11 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg, Blurred: True, Score: 0.986, Confidence: 0.696
+2025-09-22 16:26:11 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg: 1 issues detected
+2025-09-22 16:26:11 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur_images/image_15075.jpg, Time: 1.938s
+2025-09-22 16:26:11 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 1.945s
+2025-09-22 16:29:21 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:29:21 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png'}
+2025-09-22 16:29:22 - image_utils - INFO - _optimize_image_for_processing:170 - Resized image from 1919x4268 to 920x2048 for processing
+2025-09-22 16:29:22 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 1919x4268
+2025-09-22 16:29:32 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Blurred: False, Score: 0.580, Confidence: 0.794
+2025-09-22 16:29:32 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png: 0 issues detected
+2025-09-22 16:29:32 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Time: 10.959s
+2025-09-22 16:29:32 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 10.966s
+2025-09-22 16:30:38 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:30:38 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:30:39 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 720x480
+2025-09-22 16:30:41 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:30:41 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 16:30:41 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 2.529s
+2025-09-22 16:30:41 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.535s
+2025-09-22 16:34:42 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:34:42 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg'}
+2025-09-22 16:35:09 - image_utils - INFO - _optimize_image_for_processing:170 - Resized image from 3000x4000 to 1536x2048 for processing
+2025-09-22 16:35:09 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 3000x4000
+2025-09-22 16:35:22 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Blurred: True, Score: 0.894, Confidence: 0.777
+2025-09-22 16:35:22 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg: 1 issues detected
+2025-09-22 16:35:22 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Time: 39.801s
+2025-09-22 16:35:22 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 39.807s
+2025-09-22 16:40:02 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:40:02 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg'}
+2025-09-22 16:40:04 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 966x1920
+2025-09-22 16:40:13 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Blurred: True, Score: 0.776, Confidence: 0.765
+2025-09-22 16:40:13 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg: 1 issues detected
+2025-09-22 16:40:13 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Time: 11.621s
+2025-09-22 16:40:13 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 11.633s
+2025-09-22 16:42:11 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:42:11 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg'}
+2025-09-22 16:42:13 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 966x1920
+2025-09-22 16:42:21 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Blurred: True, Score: 0.776, Confidence: 0.765
+2025-09-22 16:42:21 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg: 1 issues detected
+2025-09-22 16:42:21 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Time: 9.568s
+2025-09-22 16:42:21 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 9.575s
+2025-09-22 16:42:28 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:42:28 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg'}
+2025-09-22 16:42:30 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 966x1920
+2025-09-22 16:42:38 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Blurred: True, Score: 0.776, Confidence: 0.765
+2025-09-22 16:42:38 - __main__ - INFO - analyze_comprehensive_quality_optimized:417 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg: 1 issues detected
+2025-09-22 16:42:38 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Time: 10.059s
+2025-09-22 16:42:38 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 10.069s
+2025-09-22 16:51:44 - __main__ - INFO - lifespan:72 - Starting Image Quality Check API...
+2025-09-22 16:51:48 - cache_manager - WARNING - __init__:61 - Failed to connect to Redis: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.. Caching disabled.
+2025-09-22 16:51:48 - __main__ - INFO - lifespan:98 - ThreadSafeBlurDetector initialized successfully
+2025-09-22 16:51:48 - __main__ - INFO - lifespan:111 - ImageQualityDetector initialized successfully
+2025-09-22 16:51:48 - __main__ - INFO - lifespan:115 - BlurTypeClassifier initialized successfully
+2025-09-22 16:51:51 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:51:51 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg'}
+2025-09-22 16:51:53 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 966x1920
+2025-09-22 16:52:02 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Blurred: True, Score: 0.776, Confidence: 0.765
+2025-09-22 16:52:02 - __main__ - INFO - analyze_comprehensive_quality_optimized:463 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg: 1 issues detected
+2025-09-22 16:52:02 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/2%20mb.jpeg, Time: 10.656s
+2025-09-22 16:52:02 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 10.663s
+2025-09-22 16:53:24 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 16:53:24 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:53:24 - image_utils - INFO - download_image_from_url:249 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 16:53:25 - image_utils - INFO - validate_and_convert_image:338 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 16:53:27 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:53:27 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.023s
+2025-09-22 16:53:27 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.029s
+2025-09-22 16:53:44 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:53:44 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:53:46 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 720x480
+2025-09-22 16:53:48 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:53:48 - __main__ - INFO - analyze_comprehensive_quality_optimized:463 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 16:53:48 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.650s
+2025-09-22 16:53:48 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 3.657s
+2025-09-22 16:54:18 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 16:54:18 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:54:18 - image_utils - INFO - download_image_from_url:249 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 16:54:20 - image_utils - INFO - validate_and_convert_image:338 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 16:54:22 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:54:22 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.861s
+2025-09-22 16:54:22 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.867s
+2025-09-22 16:54:24 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 16:54:24 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png'}
+2025-09-22 16:54:24 - image_utils - INFO - download_image_from_url:249 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png
+2025-09-22 16:54:27 - image_utils - INFO - validate_and_convert_image:338 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png: (4268, 1919)
+2025-09-22 16:55:06 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Blurred: False, Score: 0.614, Confidence: 0.632
+2025-09-22 16:55:06 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Time: 42.646s
+2025-09-22 16:55:06 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 42.654s
+2025-09-22 16:55:09 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:55:09 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:55:09 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 720x480
+2025-09-22 16:55:11 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:55:11 - __main__ - INFO - analyze_comprehensive_quality_optimized:463 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: 1 issues detected
+2025-09-22 16:55:11 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 2.608s
+2025-09-22 16:55:11 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 2.614s
+2025-09-22 16:55:44 - middleware - INFO - dispatch:116 - Request: POST /analyze-image from 127.0.0.1
+2025-09-22 16:55:44 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:55:44 - image_utils - INFO - download_image_from_url:249 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 16:55:45 - image_utils - INFO - validate_and_convert_image:338 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 16:55:47 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:55:47 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.295s
+2025-09-22 16:55:47 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-image in 3.301s
+2025-09-22 16:57:19 - middleware - INFO - dispatch:116 - Request: POST /analyze-batch from 127.0.0.1
+2025-09-22 16:57:19 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/blur.jpg'}
+2025-09-22 16:57:19 - image_utils - INFO - download_image_from_url:249 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg
+2025-09-22 16:57:21 - image_utils - INFO - validate_and_convert_image:338 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/blur.jpg: (480, 720)
+2025-09-22 16:57:22 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Blurred: True, Score: 0.945, Confidence: 0.746
+2025-09-22 16:57:22 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/blur.jpg, Time: 3.896s
+2025-09-22 16:57:22 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_image, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png'}
+2025-09-22 16:57:22 - image_utils - INFO - download_image_from_url:249 - Downloading image from URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png
+2025-09-22 16:57:26 - image_utils - INFO - validate_and_convert_image:338 - Successfully processed image from https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png: (4268, 1919)
+2025-09-22 16:58:05 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Blurred: False, Score: 0.614, Confidence: 0.632
+2025-09-22 16:58:05 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/1%20mb.png, Time: 42.287s
+2025-09-22 16:58:05 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-batch in 46.201s
+2025-09-22 16:58:05 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:58:05 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg'}
+2025-09-22 16:58:35 - image_quality_api - WARNING - log_image_processing:89 - Image Processing Failed - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Error: Timeout downloading image from https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Time: 30.477s
+2025-09-22 16:58:35 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 30.484s
+2025-09-22 16:58:43 - middleware - INFO - dispatch:116 - Request: POST /analyze-quality from 127.0.0.1
+2025-09-22 16:58:43 - image_quality_api - INFO - log_request:74 - API Request - Endpoint: analyze_comprehensive, Params: {'url': 'https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg'}
+2025-09-22 16:59:10 - image_utils - INFO - _optimize_image_for_processing:170 - Resized image from 3000x4000 to 1536x2048 for processing
+2025-09-22 16:59:10 - image_utils - INFO - _process_image_data_sync:225 - Successfully processed image: 3000x4000
+2025-09-22 16:59:24 - image_quality_api - INFO - log_blur_detection:93 - Blur Detection - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Blurred: True, Score: 0.894, Confidence: 0.777
+2025-09-22 16:59:24 - __main__ - INFO - analyze_comprehensive_quality_optimized:463 - Comprehensive analysis completed for https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg: 1 issues detected
+2025-09-22 16:59:24 - image_quality_api - INFO - log_image_processing:87 - Image Processing Success - URL: https://imagedetectionv2.blob.core.windows.net/test/30%20mb.jpeg, Time: 40.535s
+2025-09-22 16:59:24 - middleware - INFO - dispatch:124 - Response: 200 for /analyze-quality in 40.540s
