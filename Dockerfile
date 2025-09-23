@@ -35,7 +35,7 @@ COPY . .
 # --nofollow-imports: Don't follow unnecessary imports
 # --follow-import-to=fastapi,uvicorn,pydantic: Include essential FastAPI modules
 # --include-package=cv2,numpy,PIL,aiohttp: Include computer vision dependencies
-# --output-filename=blur-detection-api: Set executable name
+# --output-filename=image-quality-apis: Set executable name
 RUN uv run python -m nuitka \
     --standalone \
     --onefile \
@@ -43,7 +43,7 @@ RUN uv run python -m nuitka \
     --assume-yes-for-downloads \
     --no-deployment-flag=self-execution \
     --include-module=main \
-    --output-filename=blur-detection-api \
+    --output-filename=image-quality-apis \
     --output-dir=/app/dist \
     main.py
 
