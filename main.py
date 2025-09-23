@@ -71,19 +71,6 @@ async def lifespan(app: FastAPI):
     # Startup
     logger.info("Starting Image Quality Check API...")
     try:
-        # Initialize cache manager
-        cache_enabled = os.getenv("CACHE_ENABLED", "true").lower() == "true"
-        redis_host = os.getenv("REDIS_HOST", "localhost")
-        redis_port = int(os.getenv("REDIS_PORT", "6379"))
-        cache_ttl = int(os.getenv("CACHE_TTL", "3600"))
-
-        cache_manager = init_cache_manager(
-            redis_host=redis_host,
-            redis_port=redis_port,
-            default_ttl=cache_ttl,
-            enabled=cache_enabled
-        )
-
         # Initialize thread-safe blur detector with optimized parameters
         blur_detector = ThreadSafeBlurDetector(
             downsampling_factor=4,
