@@ -29,7 +29,6 @@ from image_utils import (
 from BlurDetector import BlurDetector
 from quality_detectors import ImageQualityDetector
 from blur_type_classifier import BlurTypeClassifier, BlurType
-from cache_manager import get_cache_manager, init_cache_manager
 from logging_config import setup_logging, api_logger
 from middleware import RateLimitMiddleware, RequestLoggingMiddleware, SecurityHeadersMiddleware
 
@@ -58,7 +57,6 @@ logger = logging.getLogger(__name__)
 blur_detector = None
 quality_detector = None
 blur_type_classifier = None
-cache_manager = None
 app_start_time = time.time()
 API_VERSION = "1.2.0"  # Updated version for performance optimizations
 
@@ -66,7 +64,7 @@ API_VERSION = "1.2.0"  # Updated version for performance optimizations
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan manager."""
-    global blur_detector, quality_detector, blur_type_classifier, cache_manager
+    global blur_detector, quality_detector, blur_type_classifier
 
     # Startup
     logger.info("Starting Image Quality Check API...")
@@ -109,9 +107,6 @@ async def lifespan(app: FastAPI):
 
     # Shutdown
     logger.info("Shutting down Image Quality Check API...")
-    if cache_manager:
-        cache_manager.close()
-
 
 # Create FastAPI app
 app = FastAPI(
@@ -163,27 +158,17 @@ def calculate_blur_metrics(blur_map: np.ndarray) -> Tuple[bool, float, float]:
     Calculate blur metrics from the blur detection map.
 
     Args:
-        blur_map: Blur detection map from BlurDetector
+        blur_map (np.ndarray): Blur detection map from BlurDetector
 
     Returns:
-        tuple: (is_blurred, blur_score, confidence)
+        Tuple[bool, float, float]: (is_blurred, blur_score, confidence)
     """
-    # Calculate blur score as the median of the blur map
     blur_score = float(np.median(blur_map))
-
-    # Calculate confidence based on the consistency of the blur map
-    # Higher standard deviation means less consistent, lower confidence
     std_dev = float(np.std(blur_map))
-    confidence = max(0.0, min(1.0, 1.0 - (std_dev * 2)))  # Normalize std_dev to confidence
-
-    # Determine if image is blurred based on threshold
-    # Lower blur_score means more blurred (counter-intuitive but matches the algorithm)
+    confidence = max(0.0, min(1.0, 1.0 - (std_dev * 2)))
     blur_threshold = 0.3
     is_blurred = blur_score < blur_threshold
-
-    # Normalize blur_score to 0-1 range where 1 is most blurred
     normalized_blur_score = max(0.0, min(1.0, 1.0 - blur_score))
-
     return is_blurred, normalized_blur_score, confidence
 
 
@@ -219,18 +204,20 @@ def calculate_blur_metrics_with_type(blur_map: np.ndarray, image_gray: np.ndarra
     return is_blurred, blur_score, confidence, blur_type_details
 
 
-def calculate_overall_quality_score(quality_results: dict, blur_result: dict) -> float:
+def calculate_overall_quality_score(
+    quality_results: dict,
+    blur_result: dict
+) -> float:
     """
     Calculate overall quality score based on all detection results.
 
     Args:
-        quality_results: Dictionary of quality detection results
-        blur_result: Blur detection result
+        quality_results (dict): Dictionary of quality detection results
+        blur_result (dict): Blur detection result
 
     Returns:
         float: Overall quality score (0 = poor, 1 = excellent)
     """
-    # Weight factors for different quality aspects
     weights = {
         'blur': 0.3,
         'overexposure': 0.2,
@@ -238,24 +225,16 @@ def calculate_overall_quality_score(quality_results: dict, blur_result: dict) ->
         'oversaturation': 0.15,
         'undersaturation': 0.15
     }
-
-    # Calculate weighted score (invert scores so higher = better quality)
     total_score = 0.0
     total_weight = 0.0
-
-    # Blur score (invert since blur_score represents amount of blur)
     blur_quality = 1.0 - blur_result['blur_score']
     total_score += blur_quality * weights['blur']
     total_weight += weights['blur']
-
-    # Other quality scores (invert since scores represent amount of issue)
     for quality_type, result in quality_results.items():
         if quality_type in weights:
             quality_score = 1.0 - result.score
             total_score += quality_score * weights[quality_type]
             total_weight += weights[quality_type]
-
-    # Normalize to 0-1 range
     overall_score = total_score / total_weight if total_weight > 0 else 0.0
     return max(0.0, min(1.0, overall_score))
 
@@ -353,17 +332,6 @@ async def analyze_comprehensive_quality_optimized(image_url: str) -> Comprehensi
     start_time = time.time()
 
     try:
-        # Check cache first
-        cached_result = cache_manager.get_cached_result(image_url, "comprehensive")
-        if cached_result:
-            logger.info(f"Returning cached result for {image_url}")
-            return ComprehensiveAnalysisResponse(
-                success=True,
-                image_url=image_url,
-                result=cached_result["result"],
-                error=None
-            )
-
         # Validate URL format
         if not is_valid_image_url(image_url):
             return ComprehensiveAnalysisResponse(
@@ -450,8 +418,6 @@ async def analyze_comprehensive_quality_optimized(image_url: str) -> Comprehensi
         )
 
         # Cache the result
-        cache_manager.cache_result(image_url, comprehensive_result.model_dump(), "comprehensive")
-
         # Log results
         api_logger.log_blur_detection(image_url, is_blurred, blur_score, blur_confidence)
         logger.info(f"Comprehensive analysis completed for {image_url}: {len(detected_issues)} issues detected")
@@ -622,11 +588,8 @@ async def get_cache_stats():
     Returns:
         Cache statistics and hit rates
     """
-    if not cache_manager:
-        return {"error": "Cache manager not initialized"}
-
-    return cache_manager.get_cache_stats()
-
+    # Cache stats functionality removed (cache_manager not available)
+    return {"error": "Cache manager not available"}
 
 @app.post("/cache/clear")
 async def clear_cache():
@@ -636,11 +599,8 @@ async def clear_cache():
     Returns:
         Success status
     """
-    if not cache_manager:
-        return {"error": "Cache manager not initialized"}
-
-    success = cache_manager.clear_all_cache()
-    return {"success": success, "message": "Cache cleared" if success else "Failed to clear cache"}
+    # Cache clear functionality removed (cache_manager not available)
+    return {"error": "Cache manager not available"}
 
 
 @app.post("/analyze-image", response_model=ImageAnalysisResponse)
