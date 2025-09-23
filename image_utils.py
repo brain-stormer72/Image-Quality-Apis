@@ -16,6 +16,10 @@ import os
 import time
 from urllib.parse import urlparse
 
+# Import intelligent resizing functionality
+from image_resizer import resize_image_intelligently, ResizingMetrics
+from performance_monitor import track_performance
+
 # Supported image formats (only JPG, JPEG, PNG)
 SUPPORTED_FORMATS = {'.jpg', '.jpeg', '.png'}
 
@@ -84,93 +88,97 @@ async def download_image_from_url_async(url: str, timeout: int = 30, max_size: i
         ImageDownloadError: If download fails
         ImageValidationError: If image validation fails
     """
-    try:
-        # Create aiohttp session with optimized settings
-        connector = aiohttp.TCPConnector(
-            limit=100,  # Connection pool limit
-            limit_per_host=30,  # Per-host connection limit
-            keepalive_timeout=30,
-            enable_cleanup_closed=True
-        )
+    with track_performance("download_image_async"):
+        try:
+            # Create aiohttp session with optimized settings
+            connector = aiohttp.TCPConnector(
+                limit=100,  # Connection pool limit
+                limit_per_host=30,  # Per-host connection limit
+                keepalive_timeout=30,
+                enable_cleanup_closed=True
+            )
 
-        timeout_config = aiohttp.ClientTimeout(total=timeout, connect=10)
+            timeout_config = aiohttp.ClientTimeout(total=timeout, connect=10)
 
-        async with aiohttp.ClientSession(
-            connector=connector,
-            timeout=timeout_config,
-            headers={'User-Agent': 'ImageQualityAPI/1.1.0'}
-        ) as session:
+            async with aiohttp.ClientSession(
+                connector=connector,
+                timeout=timeout_config,
+                headers={'User-Agent': 'ImageQualityAPI/1.1.0'}
+            ) as session:
 
-            async with session.get(url) as response:
-                # Check response status
-                if response.status != 200:
-                    raise ImageDownloadError(f"HTTP {response.status}: Failed to download image from {url}")
+                async with session.get(url) as response:
+                    # Check response status
+                    if response.status != 200:
+                        raise ImageDownloadError(f"HTTP {response.status}: Failed to download image from {url}")
 
-                # Check content length
-                content_length = response.headers.get('content-length')
-                if content_length and int(content_length) > max_size:
-                    raise ImageValidationError(f"Image too large: {content_length} bytes (max: {max_size})")
+                    # Check content length
+                    content_length = response.headers.get('content-length')
+                    if content_length and int(content_length) > max_size:
+                        raise ImageValidationError(f"Image too large: {content_length} bytes (max: {max_size})")
 
-                # Validate content type
-                content_type = response.headers.get('content-type', '').lower()
-                parsed_url = urlparse(url)
+                    # Validate content type
+                    content_type = response.headers.get('content-type', '').lower()
+                    parsed_url = urlparse(url)
 
-                if not content_type.startswith('image/') and content_type != 'application/octet-stream':
-                    if not any(ext in parsed_url.path.lower() for ext in SUPPORTED_FORMATS):
-                        raise ImageValidationError(f"URL does not point to a supported image format (JPG, JPEG, PNG). Content-Type: {content_type}")
+                    if not content_type.startswith('image/') and content_type != 'application/octet-stream':
+                        if not any(ext in parsed_url.path.lower() for ext in SUPPORTED_FORMATS):
+                            raise ImageValidationError(f"URL does not point to a supported image format (JPG, JPEG, PNG). Content-Type: {content_type}")
 
-                # Read image data with size limit
-                image_data = BytesIO()
-                size = 0
+                    # Read image data with size limit
+                    image_data = BytesIO()
+                    size = 0
 
-                async for chunk in response.content.iter_chunked(8192):  # 8KB chunks
-                    size += len(chunk)
-                    if size > max_size:
-                        raise ImageValidationError(f"Image too large: {size} bytes (max: {max_size})")
-                    image_data.write(chunk)
+                    async for chunk in response.content.iter_chunked(8192):  # 8KB chunks
+                        size += len(chunk)
+                        if size > max_size:
+                            raise ImageValidationError(f"Image too large: {size} bytes (max: {max_size})")
+                        image_data.write(chunk)
 
-                image_data.seek(0)
+                    image_data.seek(0)
 
-                # Process image in thread pool to avoid blocking
-                loop = asyncio.get_event_loop()
-                return await loop.run_in_executor(None, _process_image_data_sync, image_data, parsed_url.path.lower())
+                    # Process image in thread pool to avoid blocking
+                    loop = asyncio.get_event_loop()
+                    return await loop.run_in_executor(None, _process_image_data_sync, image_data, parsed_url.path.lower())
 
-    except aiohttp.ClientError as e:
-        raise ImageDownloadError(f"Network error downloading image: {e}")
-    except asyncio.TimeoutError:
-        raise ImageDownloadError(f"Timeout downloading image from {url}")
-    except Exception as e:
-        if isinstance(e, (ImageDownloadError, ImageValidationError)):
-            raise
-        raise ImageDownloadError(f"Unexpected error downloading image: {e}")
+        except aiohttp.ClientError as e:
+            raise ImageDownloadError(f"Network error downloading image: {e}")
+        except asyncio.TimeoutError:
+            raise ImageDownloadError(f"Timeout downloading image from {url}")
+        except Exception as e:
+            if isinstance(e, (ImageDownloadError, ImageValidationError)):
+                raise
+            raise ImageDownloadError(f"Unexpected error downloading image: {e}")
 
 
-def _optimize_image_for_processing(image: np.ndarray, max_dimension: int = 2048) -> np.ndarray:
+def _optimize_image_for_processing(image: np.ndarray, max_dimension: int = 2048) -> Tuple[np.ndarray, Optional[ResizingMetrics]]:
     """
-    Optimize image for processing by resizing if necessary.
+    Optimize image for processing using intelligent resizing.
 
     Args:
         image: Input image
-        max_dimension: Maximum dimension for processing
+        max_dimension: Maximum dimension for processing (legacy parameter, now handled by resizing config)
 
     Returns:
-        Optimized image
+        Tuple[np.ndarray, Optional[ResizingMetrics]]: Optimized image and resizing metrics
     """
-    height, width = image.shape[:2]
+    # Use intelligent resizing instead of basic resizing
+    optimized_image, metrics = resize_image_intelligently(image)
 
-    # Only resize if image is larger than max_dimension
-    if max(height, width) > max_dimension:
-        # Calculate scaling factor
-        scale = max_dimension / max(height, width)
-        new_width = int(width * scale)
-        new_height = int(height * scale)
+    # Fallback to legacy resizing if intelligent resizing is disabled
+    if metrics is None and max_dimension:
+        height, width = image.shape[:2]
+        if max(height, width) > max_dimension:
+            # Calculate scaling factor
+            scale = max_dimension / max(height, width)
+            new_width = int(width * scale)
+            new_height = int(height * scale)
 
-        # Use INTER_AREA for downsampling (better quality)
-        resized = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
-        logger.info(f"Resized image from {width}x{height} to {new_width}x{new_height} for processing")
-        return resized
+            # Use INTER_AREA for downsampling (better quality)
+            resized = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
+            logger.info(f"Legacy resize: {width}x{height} to {new_width}x{new_height}")
+            return resized, None
 
-    return image
+    return optimized_image, metrics
 
 
 def _process_image_data_sync(image_data: BytesIO, file_path: str) -> np.ndarray:
@@ -219,10 +227,16 @@ def _process_image_data_sync(image_data: BytesIO, file_path: str) -> np.ndarray:
         if height > max_height or width > max_width:
             raise ImageValidationError(f"Image dimensions too large: {width}x{height} (max: {max_width}x{max_height})")
 
-        # Optimize image for processing
-        optimized_image = _optimize_image_for_processing(image)
+        # Optimize image for processing with intelligent resizing
+        optimized_image, resize_metrics = _optimize_image_for_processing(image)
 
-        logger.info(f"Successfully processed image: {width}x{height}")
+        # Log resize performance if metrics are available
+        if resize_metrics:
+            logger.info(f"Image optimized: {width}x{height} → {resize_metrics.new_width}x{resize_metrics.new_height} "
+                       f"({resize_metrics.memory_reduction_percent:.1f}% memory reduction)")
+        else:
+            logger.info(f"Successfully processed image: {width}x{height}")
+
         return optimized_image
 
     except Exception as e:
@@ -234,67 +248,68 @@ def _process_image_data_sync(image_data: BytesIO, file_path: str) -> np.ndarray:
 def download_image_from_url(url: str) -> np.ndarray:
     """
     Download an image from URL and return as OpenCV numpy array.
-    
+
     Args:
         url: The image URL to download
-        
+
     Returns:
         np.ndarray: Image as OpenCV numpy array (grayscale)
-        
+
     Raises:
         ImageDownloadError: If download fails
         ImageValidationError: If image validation fails
     """
-    try:
-        logger.info(f"Downloading image from URL: {url}")
-        
-        # Set headers to mimic a browser request
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        
-        # Download the image
-        response = requests.get(url, headers=headers, timeout=DOWNLOAD_TIMEOUT, stream=True)
-        response.raise_for_status()
-        
-        # Check content type - be more flexible for cloud storage services
-        content_type = response.headers.get('content-type', '').lower()
-        parsed_url = urlparse(url)
-        if not content_type.startswith('image/') and content_type != 'application/octet-stream':
-            # Only reject if it's clearly not an image and not a generic binary type
-            if not any(ext in parsed_url.path.lower() for ext in SUPPORTED_FORMATS):
-                raise ImageValidationError(f"URL does not point to a supported image format (JPG, JPEG, PNG). Content-Type: {content_type}")
+    with track_performance("download_image_sync"):
+        try:
+            logger.info(f"Downloading image from URL: {url}")
+            
+            # Set headers to mimic a browser request
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            
+            # Download the image
+            response = requests.get(url, headers=headers, timeout=DOWNLOAD_TIMEOUT, stream=True)
+            response.raise_for_status()
+            
+            # Check content type - be more flexible for cloud storage services
+            content_type = response.headers.get('content-type', '').lower()
+            parsed_url = urlparse(url)
+            if not content_type.startswith('image/') and content_type != 'application/octet-stream':
+                # Only reject if it's clearly not an image and not a generic binary type
+                if not any(ext in parsed_url.path.lower() for ext in SUPPORTED_FORMATS):
+                    raise ImageValidationError(f"URL does not point to a supported image format (JPG, JPEG, PNG). Content-Type: {content_type}")
 
-        # Log content type for debugging
-        logger.debug(f"Content-Type: {content_type} for URL: {url}")
-        
-        # Check content length
-        content_length = response.headers.get('content-length')
-        if content_length and int(content_length) > MAX_IMAGE_SIZE:
-            raise ImageValidationError(f"Image too large: {content_length} bytes (max: {MAX_IMAGE_SIZE})")
-        
-        # Read image data
-        image_data = BytesIO()
-        downloaded_size = 0
-        
-        for chunk in response.iter_content(chunk_size=8192):
-            if chunk:
-                downloaded_size += len(chunk)
-                if downloaded_size > MAX_IMAGE_SIZE:
-                    raise ImageValidationError(f"Image too large: {downloaded_size} bytes (max: {MAX_IMAGE_SIZE})")
-                image_data.write(chunk)
-        
-        image_data.seek(0)
-        
-        # Validate and convert image
-        return validate_and_convert_image(image_data.getvalue(), url)
-        
-    except requests.exceptions.RequestException as e:
-        logger.error(f"Failed to download image from {url}: {e}")
-        raise ImageDownloadError(f"Failed to download image: {str(e)}")
-    except Exception as e:
-        logger.error(f"Unexpected error downloading image from {url}: {e}")
-        raise ImageDownloadError(f"Unexpected error: {str(e)}")
+            # Log content type for debugging
+            logger.debug(f"Content-Type: {content_type} for URL: {url}")
+            
+            # Check content length
+            content_length = response.headers.get('content-length')
+            if content_length and int(content_length) > MAX_IMAGE_SIZE:
+                raise ImageValidationError(f"Image too large: {content_length} bytes (max: {MAX_IMAGE_SIZE})")
+            
+            # Read image data
+            image_data = BytesIO()
+            downloaded_size = 0
+            
+            for chunk in response.iter_content(chunk_size=8192):
+                if chunk:
+                    downloaded_size += len(chunk)
+                    if downloaded_size > MAX_IMAGE_SIZE:
+                        raise ImageValidationError(f"Image too large: {downloaded_size} bytes (max: {MAX_IMAGE_SIZE})")
+                    image_data.write(chunk)
+            
+            image_data.seek(0)
+            
+            # Validate and convert image
+            return validate_and_convert_image(image_data.getvalue(), url)
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to download image from {url}: {e}")
+            raise ImageDownloadError(f"Failed to download image: {str(e)}")
+        except Exception as e:
+            logger.error(f"Unexpected error downloading image from {url}: {e}")
+            raise ImageDownloadError(f"Unexpected error: {str(e)}")
 
 
 def validate_and_convert_image(image_data: bytes, url: str) -> np.ndarray:

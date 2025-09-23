@@ -337,3 +337,397 @@ class ImageQualityDetector:
         }
 
         return results
+
+
+def detect_overexposure(image: np.ndarray, threshold: float = 0.95) -> QualityResult:
+    """
+    Detect overexposure in an image with optimized calculations.
+    Enhanced with vectorized operations and early termination.
+    
+    Args:
+        image: Input image as numpy array
+        threshold: Overexposure threshold (0-1)
+        
+    Returns:
+        QualityResult: Detection results with optimization metrics
+    """
+    start_time = time.time()
+    
+    try:
+        # Convert to grayscale if needed using optimized weights
+        if len(image.shape) == 3:
+            # Use optimized luminance calculation (ITU-R BT.709)
+            gray = np.dot(image[...,:3], [0.2126, 0.7152, 0.0722])
+        else:
+            gray = image.copy()
+        
+        # Normalize to 0-1 range efficiently
+        if gray.dtype != np.float32:
+            gray = gray.astype(np.float32) / 255.0
+        
+        # Early termination: check if image is obviously not overexposed
+        max_brightness = np.max(gray)
+        if max_brightness < 0.8:
+            return QualityResult(
+                score=0.0,
+                is_good_quality=True,
+                confidence=0.9,
+                details={
+                    'max_brightness': float(max_brightness),
+                    'overexposed_pixels': 0,
+                    'overexposed_percentage': 0.0,
+                    'processing_time': time.time() - start_time,
+                    'early_termination': 'low_max_brightness'
+                }
+            )
+        
+        # Vectorized overexposure detection
+        overexposed_mask = gray >= threshold
+        overexposed_pixels = np.sum(overexposed_mask)
+        total_pixels = gray.size
+        overexposed_percentage = (overexposed_pixels / total_pixels) * 100
+        
+        # Calculate overexposure score with improved scaling
+        if overexposed_percentage > 20:  # Severe overexposure
+            score = min(1.0, overexposed_percentage / 30.0)
+            confidence = 0.9
+        elif overexposed_percentage > 5:  # Moderate overexposure
+            score = overexposed_percentage / 20.0
+            confidence = 0.8
+        else:  # Minimal overexposure
+            score = overexposed_percentage / 10.0
+            confidence = 0.7
+        
+        # Additional quality metrics with vectorized operations
+        mean_brightness = np.mean(gray)
+        brightness_std = np.std(gray)
+        
+        # Check for blown highlights in color channels if available
+        blown_highlights = 0
+        if len(image.shape) == 3:
+            # Vectorized blown highlight detection
+            for channel in range(3):
+                channel_data = image[:, :, channel].astype(np.float32) / 255.0
+                blown_highlights += np.sum(channel_data >= 0.98)
+        
+        is_good_quality = score < 0.3 and overexposed_percentage < 10
+        
+        processing_time = time.time() - start_time
+        
+        return QualityResult(
+            score=float(score),
+            is_good_quality=is_good_quality,
+            confidence=float(confidence),
+            details={
+                'overexposed_pixels': int(overexposed_pixels),
+                'total_pixels': int(total_pixels),
+                'overexposed_percentage': float(overexposed_percentage),
+                'mean_brightness': float(mean_brightness),
+                'brightness_std': float(brightness_std),
+                'max_brightness': float(max_brightness),
+                'blown_highlights': int(blown_highlights),
+                'processing_time': processing_time,
+                'threshold_used': threshold
+            }
+        )
+        
+    except Exception as e:
+        return QualityResult(
+            score=0.5,
+            is_good_quality=False,
+            confidence=0.1,
+            details={'error': str(e), 'processing_time': time.time() - start_time}
+        )
+
+
+def detect_underexposure(image: np.ndarray, threshold: float = 0.05) -> QualityResult:
+    """
+    Detect underexposure in an image with optimized vectorized operations.
+    
+    Args:
+        image: Input image as numpy array
+        threshold: Underexposure threshold (0-1)
+        
+    Returns:
+        QualityResult: Detection results
+    """
+    start_time = time.time()
+    
+    try:
+        # Convert to grayscale efficiently
+        if len(image.shape) == 3:
+            gray = np.dot(image[...,:3], [0.2126, 0.7152, 0.0722])
+        else:
+            gray = image.copy()
+        
+        # Normalize efficiently
+        if gray.dtype != np.float32:
+            gray = gray.astype(np.float32) / 255.0
+        
+        # Early termination for obviously well-exposed images
+        min_brightness = np.min(gray)
+        if min_brightness > 0.2:
+            return QualityResult(
+                score=0.0,
+                is_good_quality=True,
+                confidence=0.9,
+                details={
+                    'min_brightness': float(min_brightness),
+                    'underexposed_pixels': 0,
+                    'underexposed_percentage': 0.0,
+                    'processing_time': time.time() - start_time,
+                    'early_termination': 'high_min_brightness'
+                }
+            )
+        
+        # Vectorized underexposure detection
+        underexposed_mask = gray <= threshold
+        underexposed_pixels = np.sum(underexposed_mask)
+        total_pixels = gray.size
+        underexposed_percentage = (underexposed_pixels / total_pixels) * 100
+        
+        # Calculate score with improved scaling
+        if underexposed_percentage > 25:
+            score = min(1.0, underexposed_percentage / 40.0)
+            confidence = 0.9
+        elif underexposed_percentage > 10:
+            score = underexposed_percentage / 30.0
+            confidence = 0.8
+        else:
+            score = underexposed_percentage / 20.0
+            confidence = 0.7
+        
+        # Additional metrics
+        mean_brightness = np.mean(gray)
+        
+        is_good_quality = score < 0.3 and underexposed_percentage < 15
+        
+        return QualityResult(
+            score=float(score),
+            is_good_quality=is_good_quality,
+            confidence=float(confidence),
+            details={
+                'underexposed_pixels': int(underexposed_pixels),
+                'total_pixels': int(total_pixels),
+                'underexposed_percentage': float(underexposed_percentage),
+                'mean_brightness': float(mean_brightness),
+                'min_brightness': float(min_brightness),
+                'processing_time': time.time() - start_time,
+                'threshold_used': threshold
+            }
+        )
+        
+    except Exception as e:
+        return QualityResult(
+            score=0.5,
+            is_good_quality=False,
+            confidence=0.1,
+            details={'error': str(e), 'processing_time': time.time() - start_time}
+        )
+
+
+def detect_noise(image: np.ndarray) -> QualityResult:
+    """
+    Detect noise in an image using optimized statistical methods.
+    Enhanced with vectorized operations and multiple noise metrics.
+    
+    Args:
+        image: Input image as numpy array
+        
+    Returns:
+        QualityResult: Noise detection results
+    """
+    start_time = time.time()
+    
+    try:
+        # Convert to grayscale efficiently
+        if len(image.shape) == 3:
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        else:
+            gray = image.copy()
+        
+        # Ensure float32 for calculations
+        if gray.dtype != np.float32:
+            gray = gray.astype(np.float32)
+        
+        # Multiple noise detection methods for better accuracy
+        
+        # 1. Laplacian variance method (fast)
+        laplacian = cv2.Laplacian(gray, cv2.CV_64F)
+        laplacian_var = laplacian.var()
+        
+        # 2. Local standard deviation method (vectorized)
+        # Use a smaller kernel for speed
+        kernel_size = 3
+        kernel = np.ones((kernel_size, kernel_size), np.float32) / (kernel_size * kernel_size)
+        local_mean = cv2.filter2D(gray, -1, kernel)
+        local_variance = cv2.filter2D(gray**2, -1, kernel) - local_mean**2
+        noise_estimate = np.mean(np.sqrt(np.maximum(local_variance, 0)))
+        
+        # 3. High-frequency content analysis (optimized)
+        # Apply high-pass filter
+        high_pass_kernel = np.array([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]], dtype=np.float32)
+        high_freq = cv2.filter2D(gray, -1, high_pass_kernel)
+        high_freq_energy = np.mean(np.abs(high_freq))
+        
+        # Combine metrics for final score
+        # Normalize each metric
+        laplacian_score = min(1.0, laplacian_var / 1000.0)  # Adjust scaling
+        noise_score = min(1.0, noise_estimate / 50.0)       # Adjust scaling
+        high_freq_score = min(1.0, high_freq_energy / 30.0) # Adjust scaling
+        
+        # Weighted combination
+        final_score = (laplacian_score * 0.4 + noise_score * 0.4 + high_freq_score * 0.2)
+        
+        # Determine quality and confidence
+        if final_score > 0.7:
+            is_good_quality = False
+            confidence = 0.9
+        elif final_score > 0.4:
+            is_good_quality = False
+            confidence = 0.7
+        else:
+            is_good_quality = True
+            confidence = 0.8
+        
+        processing_time = time.time() - start_time
+        
+        return QualityResult(
+            score=float(final_score),
+            is_good_quality=is_good_quality,
+            confidence=float(confidence),
+            details={
+                'laplacian_variance': float(laplacian_var),
+                'noise_estimate': float(noise_estimate),
+                'high_freq_energy': float(high_freq_energy),
+                'laplacian_score': float(laplacian_score),
+                'noise_score': float(noise_score),
+                'high_freq_score': float(high_freq_score),
+                'processing_time': processing_time
+            }
+        )
+        
+    except Exception as e:
+        return QualityResult(
+            score=0.5,
+            is_good_quality=False,
+            confidence=0.1,
+            details={'error': str(e), 'processing_time': time.time() - start_time}
+        )
+
+
+def analyze_comprehensive_quality(image: np.ndarray, 
+                                enable_blur_detection: bool = True,
+                                enable_exposure_detection: bool = True,
+                                enable_noise_detection: bool = True,
+                                blur_detector=None) -> dict:
+    """
+    Perform comprehensive quality analysis with optimized processing.
+    Enhanced with parallel processing and selective analysis.
+    
+    Args:
+        image: Input image as numpy array
+        enable_blur_detection: Enable blur detection
+        enable_exposure_detection: Enable exposure detection  
+        enable_noise_detection: Enable noise detection
+        blur_detector: Optional blur detector instance
+        
+    Returns:
+        dict: Comprehensive quality analysis results
+    """
+    start_time = time.time()
+    results = {}
+    
+    try:
+        # Parallel processing of independent analyses
+        import concurrent.futures
+        
+        def run_blur_analysis():
+            if enable_blur_detection and blur_detector:
+                blur_result = blur_detector.detectBlur(image)
+                return ('blur', blur_result)
+            return ('blur', None)
+        
+        def run_exposure_analysis():
+            if enable_exposure_detection:
+                overexp = detect_overexposure(image)
+                underexp = detect_underexposure(image)
+                return ('exposure', {'overexposure': overexp, 'underexposure': underexp})
+            return ('exposure', None)
+        
+        def run_noise_analysis():
+            if enable_noise_detection:
+                noise_result = detect_noise(image)
+                return ('noise', noise_result)
+            return ('noise', None)
+        
+        # Execute analyses in parallel for better performance
+        with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+            futures = []
+            
+            if enable_blur_detection:
+                futures.append(executor.submit(run_blur_analysis))
+            if enable_exposure_detection:
+                futures.append(executor.submit(run_exposure_analysis))
+            if enable_noise_detection:
+                futures.append(executor.submit(run_noise_analysis))
+            
+            # Collect results
+            for future in concurrent.futures.as_completed(futures):
+                analysis_type, result = future.result()
+                if result is not None:
+                    results[analysis_type] = result
+        
+        # Calculate overall quality score
+        quality_scores = []
+        confidence_scores = []
+        
+        if 'blur' in results and results['blur']:
+            blur_score = 1.0 - results['blur'].get('blur_score', 0.5)
+            quality_scores.append(blur_score * 0.4)  # 40% weight
+            confidence_scores.append(results['blur'].get('confidence', 0.5))
+        
+        if 'exposure' in results and results['exposure']:
+            exp_results = results['exposure']
+            overexp_score = 1.0 - exp_results['overexposure'].score
+            underexp_score = 1.0 - exp_results['underexposure'].score
+            exposure_score = min(overexp_score, underexp_score)
+            quality_scores.append(exposure_score * 0.35)  # 35% weight
+            confidence_scores.append((exp_results['overexposure'].confidence + 
+                                    exp_results['underexposure'].confidence) / 2)
+        
+        if 'noise' in results and results['noise']:
+            noise_score = 1.0 - results['noise'].score
+            quality_scores.append(noise_score * 0.25)  # 25% weight
+            confidence_scores.append(results['noise'].confidence)
+        
+        # Calculate final metrics
+        overall_score = sum(quality_scores) if quality_scores else 0.5
+        overall_confidence = np.mean(confidence_scores) if confidence_scores else 0.5
+        is_good_quality = overall_score > 0.6
+        
+        processing_time = time.time() - start_time
+        
+        # Add summary to results
+        results['summary'] = {
+            'overall_score': float(overall_score),
+            'is_good_quality': is_good_quality,
+            'overall_confidence': float(overall_confidence),
+            'processing_time': processing_time,
+            'analyses_performed': list(results.keys()),
+            'parallel_processing': True
+        }
+        
+        return results
+        
+    except Exception as e:
+        return {
+            'error': str(e),
+            'processing_time': time.time() - start_time,
+            'summary': {
+                'overall_score': 0.5,
+                'is_good_quality': False,
+                'overall_confidence': 0.1,
+                'error': True
+            }
+        }

@@ -44,14 +44,14 @@ class BlurTypeClassifier:
         self.defocus_threshold = 0.10
         self.mixed_threshold = 0.08
         
-    def classify_blur_type(self, image: np.ndarray, blur_map: np.ndarray, 
+    def classify_blur_type(self, image: np.ndarray, blur_result: dict, 
                           blur_score: float) -> Tuple[BlurType, float, Dict[str, Any]]:
         """
         Classify the type of blur in an image.
         
         Args:
             image: Input grayscale image (2D numpy array)
-            blur_map: Blur detection map from BlurDetector
+            blur_result: Blur detection result from BlurDetector
             blur_score: Overall blur score from blur detection
             
         Returns:
@@ -66,7 +66,7 @@ class BlurTypeClassifier:
         # Analyze different blur characteristics
         motion_score = self._analyze_motion_blur(image)
         gaussian_score = self._analyze_gaussian_blur(image)
-        defocus_score = self._analyze_defocus_blur(image, blur_map)
+        defocus_score = self._analyze_defocus_blur(image, blur_result)
         
         # Create analysis details
         analysis_details = {
@@ -203,73 +203,47 @@ class BlurTypeClassifier:
             logger.warning(f"Error in Gaussian blur analysis: {e}")
             return 0.0
     
-    def _analyze_defocus_blur(self, image: np.ndarray, blur_map: np.ndarray) -> float:
+    def _analyze_defocus_blur(self, image: np.ndarray, blur_result: dict) -> float:
         """
-        Analyze image for defocus blur characteristics.
+        Analyze defocus blur characteristics.
         
-        Defocus blur typically shows:
-        - Spatially varying blur (some areas sharp, others blurred)
-        - Circular/radial blur patterns
-        - Depth-related blur distribution
+        Args:
+            image: Input grayscale image
+            blur_result: Blur detection result from BlurDetector
+            
+        Returns:
+            float: Defocus blur score (0-1)
         """
         try:
-            # Analyze spatial variation in blur
-            blur_variance = np.var(blur_map)
-            blur_mean = np.mean(blur_map)
+            # For defocus blur, we'll use the blur score from the result
+            # and analyze image characteristics
+            blur_score = blur_result.get('blur_score', 0.0)
             
-            # Defocus blur shows high spatial variation
-            spatial_variation = blur_variance / (blur_mean + 1e-6)
+            # Analyze spatial frequency distribution
+            h, w = image.shape
+            center_x, center_y = w // 2, h // 2
             
-            # Analyze blur distribution patterns
-            # Divide image into regions and analyze blur consistency
-            h, w = blur_map.shape
+            # Sample regions from center to edges
+            region_size = min(h, w) // 8
             regions = []
-            region_size = min(h, w) // 4
             
-            if region_size > 10:
-                for i in range(0, h - region_size, region_size):
-                    for j in range(0, w - region_size, region_size):
-                        region = blur_map[i:i+region_size, j:j+region_size]
-                        regions.append(np.mean(region))
-                
-                if len(regions) > 1:
-                    region_variation = np.std(regions) / (np.mean(regions) + 1e-6)
-                else:
-                    region_variation = 0.0
-            else:
-                region_variation = 0.0
+            for i in range(0, h - region_size, region_size):
+                for j in range(0, w - region_size, region_size):
+                    region = image[i:i+region_size, j:j+region_size]
+                    regions.append(region)
             
-            # Analyze frequency domain for circular patterns
-            f_transform = np.fft.fft2(image)
-            f_shift = np.fft.fftshift(f_transform)
-            magnitude_spectrum = np.abs(f_shift)
+            if not regions:
+                return 0.0
             
-            # Look for circular/radial patterns in frequency domain
-            center_y, center_x = np.array(magnitude_spectrum.shape) // 2
-            y, x = np.ogrid[:magnitude_spectrum.shape[0], :magnitude_spectrum.shape[1]]
+            # Calculate variance for each region
+            variances = [np.var(region) for region in regions]
             
-            # Create angular analysis
-            angles = np.arctan2(y - center_y, x - center_x)
-            angle_bins = np.linspace(-np.pi, np.pi, 16)
-            angle_profile = []
+            # Defocus blur typically shows gradual decrease from center
+            # Calculate distance-based variance pattern
+            variance_std = np.std(variances) if len(variances) > 1 else 0.0
             
-            for i in range(len(angle_bins) - 1):
-                mask = (angles >= angle_bins[i]) & (angles < angle_bins[i + 1])
-                if np.any(mask):
-                    angle_profile.append(np.mean(magnitude_spectrum[mask]))
-                else:
-                    angle_profile.append(0)
-            
-            # Defocus blur shows more uniform angular distribution
-            if len(angle_profile) > 0:
-                angular_uniformity = 1.0 / (1.0 + np.std(angle_profile) / (np.mean(angle_profile) + 1e-6))
-            else:
-                angular_uniformity = 0.5
-            
-            # Combine metrics
-            defocus_score = (min(spatial_variation / 2.0, 1.0) * 0.4 + 
-                           min(region_variation / 1.0, 1.0) * 0.4 + 
-                           angular_uniformity * 0.2)
+            # Combine with blur score
+            defocus_score = min(1.0, blur_score * 0.7 + variance_std * 0.3)
             
             return float(defocus_score)
             

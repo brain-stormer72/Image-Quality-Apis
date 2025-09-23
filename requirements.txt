@@ -17,6 +17,7 @@ aiofiles>=23.2.0
 
 # Additional utilities
 python-dotenv>=1.0.0
+psutil>=5.9.0
 
 # Development and testing (optional)
 pytest>=7.0.0
