@@ -1,12 +1,12 @@
 """
-Intelligent image resizing module for optimizing image processing performance.
+Simplified intelligent image resizing module for optimizing image processing performance.
 """
 
 import cv2
 import numpy as np
 import logging
 import time
-from typing import Tuple, Dict, Any, Optional
+from typing import Tuple, Optional
 from dataclasses import dataclass
 
 from resizing_config import get_resizing_config, ResizingConfig
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ResizingMetrics:
-    """Metrics for tracking resizing performance."""
+    """Simplified metrics for tracking resizing performance."""
     original_width: int
     original_height: int
     new_width: int
@@ -30,7 +30,7 @@ class ResizingMetrics:
 
 class IntelligentImageResizer:
     """
-    Intelligent image resizer that optimizes images for processing while preserving quality.
+    Simplified intelligent image resizer that optimizes images for processing while preserving quality.
     """
     
     def __init__(self, config: Optional[ResizingConfig] = None):
@@ -41,18 +41,16 @@ class IntelligentImageResizer:
             config: Optional resizing configuration. If None, loads from environment.
         """
         self.config = config or get_resizing_config()
-        self.metrics_history: list[ResizingMetrics] = []
         
-        logger.info(f"IntelligentImageResizer initialized with config: "
+        logger.info(f"IntelligentImageResizer initialized: "
                    f"enabled={self.config.enabled}, max_dimension={self.config.max_dimension}")
     
-    def resize_image(self, image: np.ndarray, preserve_original_metadata: bool = True) -> Tuple[np.ndarray, Optional[ResizingMetrics]]:
+    def resize_image(self, image: np.ndarray) -> Tuple[np.ndarray, Optional[ResizingMetrics]]:
         """
-        Resize image using intelligent resizing logic.
+        Simplified resize image using intelligent resizing logic.
         
         Args:
             image: Input image as numpy array
-            preserve_original_metadata: Whether to preserve original image metadata
             
         Returns:
             Tuple[np.ndarray, Optional[ResizingMetrics]]: Resized image and metrics
@@ -65,8 +63,6 @@ class IntelligentImageResizer:
         
         # Check if resizing is needed
         if not self.config.should_resize(original_width, original_height):
-            if self.config.enable_performance_logging:
-                logger.debug(f"Image {original_width}x{original_height} does not need resizing")
             return image, None
         
         # Calculate new dimensions
@@ -82,7 +78,7 @@ class IntelligentImageResizer:
             
             resize_time = (time.time() - start_time) * 1000  # Convert to milliseconds
             
-            # Calculate metrics
+            # Calculate simplified metrics
             metrics = self._calculate_metrics(
                 image, resized_image, 
                 original_width, original_height,
@@ -90,16 +86,8 @@ class IntelligentImageResizer:
                 resize_time
             )
             
-            # Log performance if enabled
-            if self.config.enable_performance_logging:
-                self._log_resize_performance(metrics)
-            
-            # Store metrics for analysis
-            self.metrics_history.append(metrics)
-            
-            # Limit metrics history to prevent memory growth
-            if len(self.metrics_history) > 1000:
-                self.metrics_history = self.metrics_history[-500:]
+            logger.info(f"Resized image: {original_width}x{original_height} → {new_width}x{new_height} "
+                       f"({metrics.memory_reduction_percent:.1f}% memory reduction)")
             
             return resized_image, metrics
             
@@ -112,9 +100,9 @@ class IntelligentImageResizer:
                           original_width: int, original_height: int,
                           new_width: int, new_height: int,
                           resize_time: float) -> ResizingMetrics:
-        """Calculate resizing performance metrics."""
+        """Calculate simplified resizing performance metrics."""
         
-        # Calculate memory usage (approximate)
+        # Calculate memory usage
         original_size = original_image.nbytes
         new_size = resized_image.nbytes
         
@@ -136,47 +124,6 @@ class IntelligentImageResizer:
             memory_reduction_percent=memory_reduction,
             dimension_reduction_percent=dimension_reduction
         )
-    
-    def _log_resize_performance(self, metrics: ResizingMetrics):
-        """Log resizing performance metrics."""
-        logger.info(
-            f"Image resized: {metrics.original_width}x{metrics.original_height} → "
-            f"{metrics.new_width}x{metrics.new_height} "
-            f"({metrics.dimension_reduction_percent:.1f}% pixel reduction, "
-            f"{metrics.memory_reduction_percent:.1f}% memory reduction, "
-            f"{metrics.resize_time_ms:.2f}ms)"
-        )
-    
-    def get_performance_summary(self) -> Dict[str, Any]:
-        """
-        Get performance summary of all resizing operations.
-        
-        Returns:
-            Dict[str, Any]: Performance summary statistics
-        """
-        if not self.metrics_history:
-            return {"message": "No resizing operations performed yet"}
-        
-        total_operations = len(self.metrics_history)
-        avg_memory_reduction = sum(m.memory_reduction_percent for m in self.metrics_history) / total_operations
-        avg_dimension_reduction = sum(m.dimension_reduction_percent for m in self.metrics_history) / total_operations
-        avg_resize_time = sum(m.resize_time_ms for m in self.metrics_history) / total_operations
-        
-        total_memory_saved = sum(m.original_size_bytes - m.new_size_bytes for m in self.metrics_history)
-        
-        return {
-            "total_operations": total_operations,
-            "average_memory_reduction_percent": round(avg_memory_reduction, 2),
-            "average_dimension_reduction_percent": round(avg_dimension_reduction, 2),
-            "average_resize_time_ms": round(avg_resize_time, 2),
-            "total_memory_saved_bytes": total_memory_saved,
-            "total_memory_saved_mb": round(total_memory_saved / (1024 * 1024), 2)
-        }
-    
-    def reset_metrics(self):
-        """Reset performance metrics history."""
-        self.metrics_history.clear()
-        logger.info("Resizing metrics history reset")
 
 
 # Global resizer instance
@@ -198,7 +145,7 @@ def get_image_resizer() -> IntelligentImageResizer:
 
 def resize_image_intelligently(image: np.ndarray) -> Tuple[np.ndarray, Optional[ResizingMetrics]]:
     """
-    Convenience function to resize an image using the global resizer.
+    Simplified convenience function to resize an image using the global resizer.
     
     Args:
         image: Input image as numpy array
@@ -208,14 +155,3 @@ def resize_image_intelligently(image: np.ndarray) -> Tuple[np.ndarray, Optional[
     """
     resizer = get_image_resizer()
     return resizer.resize_image(image)
-
-
-def get_resizing_performance_summary() -> Dict[str, Any]:
-    """
-    Get performance summary from the global resizer.
-    
-    Returns:
-        Dict[str, Any]: Performance summary statistics
-    """
-    resizer = get_image_resizer()
-    return resizer.get_performance_summary()

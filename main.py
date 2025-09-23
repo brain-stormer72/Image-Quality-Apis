@@ -7,7 +7,6 @@ import time
 import logging
 import numpy as np
 import cv2
-import os
 import asyncio
 from contextlib import asynccontextmanager
 from typing import List, Tuple
@@ -16,6 +15,7 @@ from fastapi import FastAPI, HTTPException, status, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from constants import LOG_LEVEL, LOG_FILE, RATE_LIMIT_PER_MINUTE, RATE_LIMIT_PER_HOUR
 from models import (
     ImageRequest, BatchImageRequest, ImageAnalysisResponse,
     BatchAnalysisResponse, BlurResult, BlurTypeDetails, HealthResponse, ErrorResponse,
@@ -34,7 +34,7 @@ from middleware import RateLimitMiddleware, RequestLoggingMiddleware, SecurityHe
 
 # Import performance optimization modules (no caching)
 from performance_monitor import get_performance_monitor, track_performance
-from image_resizer import get_resizing_performance_summary
+# Removed get_resizing_performance_summary as part of simplification
 
 
 class ThreadSafeBlurDetector:
@@ -51,8 +51,8 @@ class ThreadSafeBlurDetector:
         return detector.detectBlur(image)
 
 # Setup logging
-log_level = os.getenv("LOG_LEVEL", "INFO")  # Back to INFO for production
-log_file = os.getenv("LOG_FILE", "logs/api.log")
+log_level = LOG_LEVEL  # Back to INFO for production
+log_file = LOG_FILE
 setup_logging(log_level, log_file)
 
 logger = logging.getLogger(__name__)
@@ -62,7 +62,7 @@ blur_detector = None
 quality_detector = None
 blur_type_classifier = None
 app_start_time = time.time()
-API_VERSION = "1.2.0"  # Updated version for performance optimizations
+API_VERSION = "1.2.1"  # Updated version for performance optimizations
 thread_pool_executor = None
 
 
@@ -150,8 +150,8 @@ app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(
     RateLimitMiddleware,
-    calls_per_minute=int(os.getenv("RATE_LIMIT_PER_MINUTE", "60")),
-    calls_per_hour=int(os.getenv("RATE_LIMIT_PER_HOUR", "1000"))
+    calls_per_minute=RATE_LIMIT_PER_MINUTE,
+    calls_per_hour=RATE_LIMIT_PER_HOUR
 )
 app.add_middleware(
     CORSMiddleware,
@@ -601,7 +601,7 @@ async def get_optimization_stats():
     Returns:
         Optimization statistics including resizing metrics
     """
-    resizing_summary = get_resizing_performance_summary()
+    resizing_summary = {"message": "Simplified resizing - no detailed metrics tracking"}
     return {
         "resizing_optimization": resizing_summary,
         "caching_enabled": False,
@@ -619,7 +619,7 @@ async def get_performance_metrics():
     """
     performance_monitor = get_performance_monitor()
     performance_summary = performance_monitor.get_performance_summary()
-    resizing_summary = get_resizing_performance_summary()
+    resizing_summary = {"message": "Simplified resizing - no detailed metrics tracking"}
 
     return {
         "performance_metrics": performance_summary,
@@ -1173,7 +1173,7 @@ async def get_optimization_stats():
     Returns:
         Optimization statistics including resizing metrics
     """
-    resizing_summary = get_resizing_performance_summary()
+    resizing_summary = {"message": "Simplified resizing - no detailed metrics tracking"}
     return {
         "resizing_optimization": resizing_summary,
         "caching_enabled": False,
@@ -1191,7 +1191,7 @@ async def get_performance_metrics():
     """
     performance_monitor = get_performance_monitor()
     performance_summary = performance_monitor.get_performance_summary()
-    resizing_summary = get_resizing_performance_summary()
+    resizing_summary = {"message": "Simplified resizing - no detailed metrics tracking"}
 
     return {
         "performance_metrics": performance_summary,

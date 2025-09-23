@@ -18,6 +18,7 @@ from urllib.parse import urlparse
 
 # Import intelligent resizing functionality
 from image_resizer import resize_image_intelligently, ResizingMetrics
+from constants import MAX_IMAGE_DIMENSIONS, MAX_FILE_SIZE_MB
 from performance_monitor import track_performance
 
 # Supported image formats (only JPG, JPEG, PNG)
@@ -25,9 +26,8 @@ SUPPORTED_FORMATS = {'.jpg', '.jpeg', '.png'}
 
 # Configure logging
 logger = logging.getLogger(__name__)
-MAX_IMAGE_SIZE = 50 * 1024 * 1024  # 50MB max file size
+MAX_IMAGE_SIZE = MAX_FILE_SIZE_MB * 1024 * 1024  # Convert MB to bytes
 DOWNLOAD_TIMEOUT = 30  # seconds
-MAX_IMAGE_DIMENSIONS = (10000, 10000)  # max width, height
 
 
 class ImageDownloadError(Exception):
@@ -152,7 +152,7 @@ async def download_image_from_url_async(url: str, timeout: int = 30, max_size: i
 
 def _optimize_image_for_processing(image: np.ndarray, max_dimension: int = 2048) -> Tuple[np.ndarray, Optional[ResizingMetrics]]:
     """
-    Optimize image for processing using intelligent resizing.
+    Optimize image for processing using intelligent resizing with file size consideration.
 
     Args:
         image: Input image
@@ -161,7 +161,51 @@ def _optimize_image_for_processing(image: np.ndarray, max_dimension: int = 2048)
     Returns:
         Tuple[np.ndarray, Optional[ResizingMetrics]]: Optimized image and resizing metrics
     """
-    # Use intelligent resizing instead of basic resizing
+    # Calculate current image memory size
+    current_size_bytes = image.nbytes
+    max_size_bytes = MAX_FILE_SIZE_MB * 1024 * 1024
+    
+    # Check if image exceeds file size limit and needs aggressive resizing
+    if current_size_bytes > max_size_bytes:
+        height, width = image.shape[:2]
+        # Calculate aggressive resize factor to reduce file size
+        size_ratio = current_size_bytes / max_size_bytes
+        # Use square root to be less aggressive but still effective
+        resize_factor = min(0.7, 1.0 / (size_ratio ** 0.5))
+        
+        new_width = int(width * resize_factor)
+        new_height = int(height * resize_factor)
+        
+        # Ensure minimum dimensions
+        new_width = max(new_width, 64)
+        new_height = max(new_height, 64)
+        
+        # Resize with high quality interpolation
+        resized = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
+        
+        # Create metrics for file size-based resizing
+        new_size_bytes = resized.nbytes
+        memory_reduction = ((current_size_bytes - new_size_bytes) / current_size_bytes) * 100
+        
+        logger.info(f"File size-based resize: {width}x{height} to {new_width}x{new_height} "
+                   f"({memory_reduction:.1f}% memory reduction)")
+        
+        # Create simplified metrics
+        metrics = ResizingMetrics(
+            original_width=width,
+            original_height=height,
+            new_width=new_width,
+            new_height=new_height,
+            original_size_bytes=current_size_bytes,
+            new_size_bytes=new_size_bytes,
+            resize_time_ms=0.0,  # Not tracking time for simplicity
+            memory_reduction_percent=memory_reduction,
+            dimension_reduction_percent=((width * height - new_width * new_height) / (width * height)) * 100
+        )
+        
+        return resized, metrics
+    
+    # Use intelligent resizing for dimension-based optimization
     optimized_image, metrics = resize_image_intelligently(image)
 
     # Fallback to legacy resizing if intelligent resizing is disabled
